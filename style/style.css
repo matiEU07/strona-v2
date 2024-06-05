@@ -1,4 +1,15 @@
 body{
     background-color: rgb(17, 17, 17);
     color: rgb(193, 193, 193);
+    font-family:bahnschrift ;
+}
+.navbar{
+    background-color: black;
+}
+@font-face {
+    font-family: 'bahnschriftregular';
+    src: url('bahnschrift-webfont.woff2') format('woff2'),
+         url('bahnschrift-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
 }
