@@ -3,6 +3,7 @@ body{
     color: rgb(193, 193, 193);
     font-family:Urbanist ;
     margin: 0px;
+    font-size: 30px;
 }
 
 ::-moz-selection { /* Code for Firefox */
@@ -21,11 +22,12 @@ button{
     border-color: rgb(193, 193, 193);
     color:rgb(193, 193, 193);
     border-style: solid;
-    padding: 8px;
-    padding-left: 16px;
-    padding-right: 16px;
-    margin-left: 15px;
-    border-radius: 4px;
+    padding: 16px;
+    padding-left: 32px;
+    padding-right: 32px;
+    margin-left: 30px;
+    border-radius: 8px;
+    font-size: 24px;
     transition: 2s;
 }
 button:hover{
@@ -41,7 +43,7 @@ button:active{
 }
 .navbar{
     background-color: black;
-    padding: 15px;  
+    padding: 30px;  
 }
 .urbanist-f {
     font-family: "Urbanist", sans-serif;
@@ -50,17 +52,17 @@ button:active{
     font-style: normal;
 }
 h1{
-    font-size: 64px;
+    font-size: 128px;
     margin: 0px;
-    margin-top: 48px;
+    margin-top: 128px;
 }  
 h3{
     margin: 0px;
-    font-size: 20px;
+    font-size: 40px;
 }
 .titletext{
     font-weight: 800;
-    font-size:20px;
+    font-size:40px;
 }
 .spacer{
     width: 50%;
@@ -68,7 +70,7 @@ h3{
     background: rgb(255,255,255);
 background: linear-gradient(90deg, rgba(255,255,255,0) 0%, #fff9f767 50%, rgba(255,255,255,0) 100%);
 }
-.main{width: 50%;}
+.main{width: 40%;}
 redacted{
     color:black;
     background-color: black;
