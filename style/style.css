@@ -1,15 +1,75 @@
 body{
     background-color: rgb(17, 17, 17);
     color: rgb(193, 193, 193);
-    font-family:bahnschriftregular ;
+    font-family:Urbanist ;
+    margin: 0px;
+}
+
+::-moz-selection { /* Code for Firefox */
+    color: rgb(255, 153, 0);
+    background: rgba(255, 153, 0, 0.096);
+    border-radius: 4px;
+  }
+::selection {
+    color: rgb(255, 153, 0);
+    background: rgba(255, 153, 0, 0.096);
+  }
+
+button{
+    font-family:Urbanist, sans-serif;
+    background-color: transparent;
+    border-color: rgb(193, 193, 193);
+    color:rgb(193, 193, 193);
+    border-style: solid;
+    padding: 8px;
+    padding-left: 16px;
+    padding-right: 16px;
+    margin-left: 15px;
+    border-radius: 4px;
+    transition: 2s;
+}
+button:hover{
+    background-color: rgba(255, 255, 255, 0.194);
+    color:white;
+    border-color: white;
+    transition: 0.25s;
+}
+button:active{
+    color:rgb(122, 122, 122);
+    background-color: transparent;
+    border-color: rgb(122, 122, 122);
 }
 .navbar{
     background-color: black;
+    padding: 15px;  
 }
-@font-face {
-    font-family: 'bahnschriftregular';
-    src: url('bahnschrift-webfont.woff2') format('woff2'),
-         url('bahnschrift-webfont.woff') format('woff');
-    font-weight: normal;
+.urbanist-f {
+    font-family: "Urbanist", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 100;
     font-style: normal;
+}
+h1{
+    font-size: 64px;
+    margin: 0px;
+    margin-top: 48px;
+}  
+h3{
+    margin: 0px;
+    font-size: 20px;
+}
+.titletext{
+    font-weight: 800;
+    font-size:20px;
+}
+.spacer{
+    width: 50%;
+    height: 8px;
+    background: rgb(255,255,255);
+background: linear-gradient(90deg, rgba(255,255,255,0) 0%, #fff9f767 50%, rgba(255,255,255,0) 100%);
+}
+.main{width: 50%;}
+redacted{
+    color:black;
+    background-color: black;
 }
