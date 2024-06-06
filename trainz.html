@@ -51,10 +51,12 @@
     var currentTab = 1;
     document.getElementById('stock').onclick = function () {
         currentTab=1;
+        document.getElementById('content').innerHTML = ''
         displayAssets();
     }
     document.getElementById('other').onclick = function () {
         currentTab=2;
+        document.getElementById('content').innerHTML = ''
         displayAssets();
     }
 
@@ -74,9 +76,13 @@
         //nazwa pliku
         //tekst na przycisku
 
-    createElement("type", "ew58-011", "PKP class EW58, made for SKM Trojmiasto in 1974.", "trainz2019+", "https://cataas.com/cat?height=200&width:200", "https://mati.ep09.net/stare/old/404.html", "uh oh", "coming soon!")
-    createElement("type", "Tōyō Rapid 1000 series", "1995. im bad at descriptions.", "trainz2019+", "https://cataas.com/cat?height=200&width:200", "https://mati.ep09.net/stare/old/404.html", "uh oh", "coming soon!")
-
+        if(currentTab==1){
+            createElement("type", "ew58-011", "PKP class EW58, made for SKM Trojmiasto in 1974.", "trainz2019+", "https://cataas.com/cat?height=200&width:200", "https://mati.ep09.net/stare/old/404.html", "uh oh", "coming soon!")
+            createElement("type", "Tōyō Rapid 1000 series", "1995. im bad at descriptions.", "trainz2019+", "https://cataas.com/cat?height=200&width:200", "https://mati.ep09.net/stare/old/404.html", "uh oh", "coming soon!")
+        }
+        if(currentTab==2){
+            createElement("type", "wkd ochota station", "wkd ochota station as it currently is in warsaw.", "trainz2019+", "https://cataas.com/cat?height=200&width:200", "https://mati.ep09.net/stare/old/404.html", "uh oh", "coming soon!")
+        }
     //train++
 //}    
 }
