@@ -1,6 +1,6 @@
 body{
     background-color: rgb(17, 17, 17);
-    color: rgb(193, 193, 193);
+    color: rgba(255, 255, 255, 0.694);
     font-family:Urbanist ;
     margin: 0px;
     font-size: 30px;
@@ -16,11 +16,19 @@ body{
     background: rgba(255, 153, 0, 0.096);
   }
 
+a{
+    text-decoration: none;
+    color: rgba(255, 255, 255, 0.694);
+}
+a:visited{
+    color: rgba(255, 255, 255, 0.694);
+}
+
 button{
     font-family:Urbanist, sans-serif;
     background-color: transparent;
-    border-color: rgb(193, 193, 193);
-    color:rgb(193, 193, 193);
+    border-color: rgba(255, 255, 255, 0.694);
+    color:rgba(255, 255, 255, 0.694);
     border-style: solid;
     padding: 16px;
     padding-left: 32px;
@@ -71,7 +79,95 @@ h3{
 background: linear-gradient(90deg, rgba(255,255,255,0) 0%, #fff9f767 50%, rgba(255,255,255,0) 100%);
 }
 .main{width: 40%;}
+.mainwide{width: 75%;}
 redacted{
     color:black;
     background-color: black;
+}
+.no-margin{
+    margin: 0px !important;
+}
+.content{
+    background-color: black;
+}
+
+.container:hover{
+    border-color: rgb(255, 153, 0);
+    transition: 0.2s;
+    filter: drop-shadow(0px 0px 256px rgba(255, 153, 0, 0.251));
+}
+
+
+.container * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.container {
+    display: flex;
+    flex-direction: row;
+    width: 800px;
+    height: 200px;
+    padding: 20px;
+    border: 2px solid rgba(255, 255, 255, 0.39);
+    border-radius: 8px;
+    background-color: rgba(255, 255, 255, 0.043);
+    transition: 0.2s;
+
+}
+
+.container-img {
+    width: 200px;
+    height: 200px;
+    border: 2px solid rgb(124, 124, 124);
+    border-radius: 8px;
+    margin-right: 10px;
+}
+
+.custom-right-div {
+    display: flex;
+    flex-direction: column;
+    width: calc(100% - 260px); /* Subtract the width of the left div and margin */
+}
+
+.custom-right-div .container-text {
+    width: 100%;
+    text-align: left;
+    height: 50px;
+    margin-bottom: 10px;
+}
+
+.custom-right-div .container-desc {
+    width: 100%;
+    height: 200px;
+    margin-bottom: 10px;
+    text-align: left;
+    color: rgba(255, 255, 255, 0.397);
+}
+
+.custom-bottom-container {
+    display: flex;
+    align-items: center;
+    text-align: left;
+    color: rgba(255, 255, 255, 0.217) ;
+}
+
+.custom-right-div .custom-bottom-div {
+    flex: 1;
+    height: 30px;
+}
+
+.custom-button {
+    margin-left: 10px;
+    padding: 10px 20px;
+    cursor: pointer;
+    border: 2px solid rgba(255, 255, 255, 0.694);
 }

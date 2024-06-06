@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="stylesheet" href="style/style.css">
+    <link rel="stylesheet" href="https://raw.githubusercontent.com/matiEU07/strona-v2/main/style/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Urbanist:ital,wght@0,100..900;1,100..900&display=swap"
+        rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>matiEP09</title>
+
+
+
+<body>
+    <div class="navbar">
+        <!--<class class="titletext">matiEP09</class>--><button>start</button><button>trainz</button><button>3d
+            models</button><button>tutorials</button>
+    </div>
+
+    <center>
+        <h1>TRAINZ</h1>
+        <div class="mainwide">
+            <div class="spacer"><br>
+
+                <button id="stock" class="no-margin">trains</button><button id="other">scenery</button>
+                <br><br>
+                <div id="content"></div>
+        </div>
+        <!--
+        <marquee scrollamount="120" loop="1" scrolldelay="61"><img src="en57.gif"></marquee>
+        <div class="navbar"><br><br>© matiEP09<br></div>
+        i completely forgot how to write html and that shows.-->
+    </center>
+
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+<script>
+    //===============================================||buttons :3||===============================================\\
+    var currentTab = 1;
+    document.getElementById('stock').onclick = function () {
+        currentTab=1;
+        displayAssets();
+    }
+    document.getElementById('other').onclick = function () {
+        currentTab=2;
+        displayAssets();
+    }
+
+
+    //===============================================||displaying the thingys||===============================================\\
+    function displayAssets(){
+    var train = 1
+
+//    while (train<100){
+
+        //typ (railcar, etc.)
+        //nazwa
+        //opis
+        //komatybilność
+        //zdjęcie
+        //link do pobrania
+        //nazwa pliku
+        //tekst na przycisku
+
+    createElement("type", "ew58-011", "PKP class EW58, made for SKM Trojmiasto in 1974.", "trainz2019+", "https://cataas.com/cat?height=200&width:200", "https://mati.ep09.net/stare/old/404.html", "uh oh", "coming soon!")
+    createElement("type", "Tōyō Rapid 1000 series", "1995. im bad at descriptions.", "trainz2019+", "https://cataas.com/cat?height=200&width:200", "https://mati.ep09.net/stare/old/404.html", "uh oh", "coming soon!")
+
+    //train++
+//}    
+}
+
+
+
+    function createElement(content, name, desc, version, imgsrc, downloadlink, filename, buttontext){
+    
+        document.getElementById('content').innerHTML += '<div class="container"><img class="container-img" src="'+imgsrc+'"><div class="custom-right-div"><div class="container-text">'+name+'</div><div class="container-desc">'+desc+'</div><div class="custom-bottom-container"><div class="custom-bottom-div">'+version+'</div><button class="custom-button"><a href="'+downloadlink+'" download="'+filename+'">'+buttontext+'</button></div></div></div><br>';
+    }
+
+//    window.onload = kibel;
+</script>
