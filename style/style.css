@@ -84,7 +84,14 @@ h3{
 background: linear-gradient(90deg, rgba(255,255,255,0) 0%, #fff9f767 50%, rgba(255,255,255,0) 100%);
 
 margin: 0 auto;
+
 }
+
+.container{
+    margin: 0 auto;
+    width: max-content;
+}
+
 .buttons{
     margin: 0 auto;
     width: max-content;
