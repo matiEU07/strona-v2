@@ -212,3 +212,10 @@ content {
     cursor: pointer;
     border: 2px solid rgba(255, 255, 255, 0.694);
 }
+.mainSim{
+
+        background-image: url("https://cataas.com/cat?height=200&width:200");
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+
+}
