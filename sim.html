@@ -13,9 +13,10 @@
     <title>matiEP09</title>
 
 
-<body>
+<body class="simdownload">
     <header>
-        <nav class="navbar">
+
+        <nav class="navbar-pink">
             <!--<class class="titletext">matiEP09</class>--><button><a
                     href="index.html">start</a></button><button>trainz</button><button>3d
                 models</button><button>tutorials</button><button><a href="sim.html">ShortLinesSim</a></button>
@@ -23,43 +24,38 @@
     </header>
 
 
-    <main>
-        <h1><!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <link rel="stylesheet" href="style/style.css">
-    <link rel="stylesheet" href="https://raw.githubusercontent.com/matiEU07/strona-v2/main/style/style.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Urbanist:ital,wght@0,100..900;1,100..900&display=swap"
-        rel="stylesheet">
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>matiEP09</title>
 
 
-    <main class="mainSim">
+
+
+    <center>
+
+        <div class="banner"><br><br><br><br>
         <h1>ShortLinesSim</h1></h1>
-        <div class="mainwide">
-            <div class="spacer"><br></div><br>
-
-                 <u><a href="https://send.cm/d/19Lh7">pobierz na windows</a></u><br><br>
-                 <u>pobierz na windows 95 i starsze</u><br>
-                 <u>pobierz na samsung smart fridge</u><br>
-                 <u>pobierz na apple watch</u><br>
-                
-                <br><br><h4>changelog:</h4>
-                <br>added janek graphics option.
-                <br><br><h4>important:</h4>
-                <br>for most graphic cards, when in game, press [esc], then invert displacement, then displacement.
-            <br><br>
         </div>
+    </center>
+        <div class="simcontent">
+            <div class="smallcontain"><br><br><br>  
+            <h2>About:</h2><br>Hi! looks like you found my own train simulator, that's currently in the pre-alpha stage! Feel free to test it out and contant me about any suggestions you might have at mati@ep09.net    
+            <br><br><h4>changelog:</h4>
+                added janek graphics option.
+                <br><br><h4>important:</h4>
+                for most graphic cards, when in game, press [esc], then invert displacement, then displacement.
+            <br><br>
+            </div>
+            <br><br>            <br><br>            <br><br>
+</div>
+        <center>
+<div class="simdownload"><br><br><br><br><br><br>
+            <u><a href="https://send.cm/d/19Lh7">download for Windows</a></u><br><br>
+            <u>download for Apple Watch</u><br>            <br><br>            <br><br>            <br><br>
+        </div>
+    </center>
         <!--
         <marquee scrollamount="120" loop="1" scrolldelay="61"><img src="en57.gif"></marquee>
         <div class="navbar"><br><br>© matiEP09<br></div>
         i completely forgot how to write html and that shows.-->
-    </main>
+
 
 
 
@@ -75,56 +71,7 @@
 
 
 <script>
-    //===============================================||buttons :3||===============================================\\
-    var currentTab = 1;
-    document.getElementById('stock').onclick = function () {
-        currentTab=1;
-        document.getElementById('content').innerHTML = ''
-        displayAssets();
-    }
-    document.getElementById('other').onclick = function () {
-        currentTab=2;
-        document.getElementById('content').innerHTML = ''
-        displayAssets();
-    }
-    document.getElementById('edit').onclick = function () {
-        currentTab=3;
-        document.getElementById('content').innerHTML = ''
-        displayAssets();
-    }
+    
 
 
-    //===============================================||displaying the thingys||===============================================\\
-    function displayAssets(){
-    var train = 1
-
-//    while (train<100){
-
-        //typ (railcar, etc.)
-        //nazwa
-        //opis
-        //komatybilność
-        //zdjęcie
-        //link do pobrania
-        //nazwa pliku
-        //tekst na przycisku
-
-        if(currentTab==1){
-            createElement("type", "ew58-xxx", "PKP class EW58, made for SKM Trojmiasto in 1974,<br>and decommissioned in 2012. <br> now there is only one set left, the EW58-028.", "trainz2019+", "https://cataas.com/cat?height=200&width:200", "https://mati.ep09.net/stare/old/404.html", "uh oh", "coming soon!")
-            createElement("type", "Tōyō Rapid 1000 series", "There were 12 of ten-car sets that were converted in 1995 from Tokyo Metro 5000 series sets.<br> all of them were retired in 2006.", "trainz2019+", "https://cataas.com/cat?height=200&width:200", "https://mati.ep09.net/stare/old/404.html", "uh oh", "coming soon!")
-        }
-        if(currentTab==2){
-            createElement("type", "wkd ochota station", "wkd ochota station as it currently is in warsaw.", "trainz2019+", "https://cataas.com/cat?height=200&width:200", "https://mati.ep09.net/stare/old/404.html", "uh oh", "coming soon!")
-        }
-        if(currentTab==3){
-            createElement("type", "Warszawa Ochota Platform", "fast retexture to match the platform at Warszawa Ochota", "trainz2009+", "https://cataas.com/cat?height=200&width:200", "https://mati.ep09.net/stare/old/404.html", "uh oh", "coming never")
-        }
-    //train++
-//}    
-}
-
-    function createElement(content, name, desc, version, imgsrc, downloadlink, filename, buttontext){
-        document.getElementById('content').innerHTML += '<div class="container"><img class="container-img" src="'+imgsrc+'"><div class="custom-right-div"><div class="container-text">'+name+'</div><div class="container-desc">'+desc+'</div><div class="custom-bottom-container"><div class="custom-bottom-div">'+version+'</div><button class="custom-button"><a href="'+downloadlink+'" download="'+filename+'">'+buttontext+'</button></div></div></div><br>';
-    }
-//    window.onload = kibel;
 </script>
