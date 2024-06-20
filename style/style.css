@@ -150,6 +150,7 @@ redacted{
     background-color: black;
 }
 
+
 .container:hover{
     border-color: rgb(255, 153, 0);
     transition: 0.2s;
