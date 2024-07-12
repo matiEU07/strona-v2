@@ -212,7 +212,7 @@ content {
     text-align: left;
     color: rgba(255, 255, 255, 0.397);
 }
-
+.counter-blank{display: none;}
 .custom-bottom-container {
     display: flex;
     align-items: center;
