@@ -21,12 +21,26 @@
             background-image: url(toyo/toyofrontexplanation.png);
             background-size: 1000px;
         }
+        .toyocategory{
+            border-style: none;
+            color: #BE1D2C;
+            font-weight: 900;
+            font-size: 16px;
+        }
+        .toyocategory:hover{
+            background-color: transparent;
+            color: #ffcf98;
+            cursor: pointer;
+            filter: drop-shadow(0px 0px 16px #ff0000);
+        }
+        .navbar:hover{
+            border-color: #BE1D2C;
+            filter: drop-shadow(0px 0px 64px #BE1D2C);
+        }
     </style>
     <title>matiEP09</title>
 
-    <script>
-        
-    </script>
+    
 
 <body>
     <div class="navbar">
@@ -35,22 +49,29 @@
 
     <center><h1>Tōyō Rapid 1000 series</h1>
     <h3>everything i know</h3>
-<br><br><br>
-
-    since <i>a lot</i> of documentation of the tōyō rapid 1000 series is only in japanese, i decided to compile some knowledge in english.
+<br>
+<button class="toyocategory" id="main">main</button>
+<button class="toyocategory" id="videos">videos</button>
+<button class="toyocategory" id="other">other</button>
 <br><br>
-    So, Tōyō Rapid 1000 series was an electric multiple unit, and were in 10-car sets. <br>
-    They consisted of eight motored cars ("M") and two trailer cars ("T") at the both ends.<br><br>
+
+
+
+        <div id="content">
+        since <i>a lot</i> of documentation of the tōyō rapid 1000 series is only in japanese, i decided to compile some knowledge in english.
+        <br><br>
+        So, Tōyō Rapid 1000 series was an electric multiple unit, and were in 10-car sets. <br>
+        They consisted of eight motored cars ("M") and two trailer cars ("T") at the both ends.<br><br>
         <img src="toyo/toyorapid1000.webp" width="95%" class="shadow"><br><br><br>
         As you probably noticed, the car formation is unchanged from Tokyo metro 5000 series,<br>
         but the vehicle numbering is. Now, intead of numbers being assigned based on the equipment and order of manufacture,<br>
-        they were based on the vehicle's coupling position.
+        they were based on the vehicle's coupling position. 
         <br><br>
         <div class="hoverToyoFront"></div> 
         <br>
         <br><br>
         <h3>Controls</h3>
-        <br> i still have to model them, but they were unchanged from the tokyo metro 5000 series, aside from getting rid of the jr safety devices <br><br><br><br><br>
+        <br> i still have to model them, but they were unchanged from the tokyo metro 5000 series, aside from getting rid of the JR safety devices <br><br><br><br><br>
 
 
         <div style="width: 60%;">
@@ -79,9 +100,19 @@
         </ul>
         </div>
     </div>
+</div>
+
+
+
+
+
+
+
+
 
     <img src="toyo/toyorapidrailwaycolors.png" width="100%" height="10px" style="margin-bottom: -5px;">
-<div class="footer" style="filter: drop-shadow(0px 0px 64px rgba(0, 0, 0, 0.18));">this page is still work in progress!<br><br>© matiEP09<br></div>
+<div class="footer" style="filter: drop-shadow(0px 0px 64px rgba(0, 0, 0, 0.18));">this page is still work in progress!<br><br>
+    big thanks to Socimi for providing the technical drawings,<br>and to u/microbit262 for additional info.<br><br>© matiEP09<br></div>
 <!--i completely forgot how to write html and that shows.-->
 </center>
 </body>
@@ -95,3 +126,23 @@
 
 
 -->
+
+
+<script>
+    var currentTab = 1;
+    var main = document.getElementById('content').innerHTML
+
+    document.getElementById('main').onclick = function () {
+    currentTab=1;
+    document.getElementById('content').innerHTML = main
+}
+    document.getElementById('videos').onclick = function () {
+    currentTab=2;
+    document.getElementById('content').innerHTML = 'Now, there aren&#39t many videos of the Tōyō rapid 1000 series that are on youtube,<br> so i just thought to compile the ones i found the most interesting ones into a list.<br><br> note: this list will change.<br><br><iframe width="1000" height="550" src="https://www.youtube.com/embed/YemNnw40Xtw" title="東葉快速1000系　東葉勝田台→中野　営団地下鉄東西線直通" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe><br>cab view<br><br><iframe width="1000" height="550" src="https://www.youtube.com/embed/5Uus6X9uIKo" title="営団5000系66編成・東葉高速1000形1060編成" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe><br>Tokyo Metro 5000 series + Toyo Rapid 1000 series passing through the Nishi-Kasai station i think<br><br><iframe width="1000" height="550" src="https://www.youtube.com/embed/xRP03k5RTPo" title="【懐かしいね！】東へ西へ営団時代の東西線！！" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe><br>'
+
+}
+    document.getElementById('other').onclick = function () {
+    currentTab=3;
+    document.getElementById('content').innerHTML = ''
+}
+</script>
