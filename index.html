@@ -12,32 +12,51 @@
 
     <script>
         function kibel(){
-            //too much kotlin, man.
+            var userLang = navigator.language;
+            console.log(userLang)
+
+            var flagIcon = document.getElementById('countryFlag')
+        
+            if (userLang!='pl')
+            {
+                flagIcon.src='localised/en.png'
+                console.log('switching to en')
+            }
+            else
+            {
+                flagIcon.src='localised/pl.png'
+                console.log('switching to pl')
+
+            }
+
         }
         window.onload = kibel;
     </script>
 
 <body>
-    <div class="navbar">
-        <!--<class class="titletext">matiEP09</class>--><button>start</button><button><a href="trainz.html">trainz</a></button><button>3d models</button><button>tutorials</button><button><a href="sim.html">ShortLinesSim</a></button>
-    </div>
 
-    <center><h1>matiEP09</h1>
-        <div class="spacer">
-        </div>    <br>
+    <nav>
+        <button>start</button><button><a href="trainz.html">trainz</a></button><button>3d models</button><button>tutorials</button><button><a href="sim.html">ShortLinesSim</a></button>
+    </nav>
+
+    <nav class="langSelect">
+        <img src="localised/pl.png" id="countryFlag">
+    </nav>
+
+    <main>
+    <h1>matiEP09</h1>
     <h3>trainz • 3dModelling • gamedev</h3>
     <br>
     <div class="main">
     this is the place where i will share all the things i want to be on the internet.<br> from open source apps, to trainz addons.<br>might as well throw some tutorials in for <redacted>[somoeone]</redacted>
         <br><br><br>
     try to click one of the links above to get started!
-
+    </main>
  
 
 </div>
-<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><marquee scrollamount="120" loop="1" scrolldelay="61"><img src="en57.gif"></marquee>
-<div class="footer"><br><br>© matiEP09<br></div>
+<marquee scrollamount="120" loop="1" scrolldelay="61"><img src="en57.gif"></marquee>
 <!--i completely forgot how to write html and that shows.-->
-</center>
+
 </body>
 </html>

@@ -1,42 +1,47 @@
+
+:root {
+    --maintext: rgba(250, 252, 255, 0.694);
+    --secondarytext: rgba(255, 253, 250, 0.192);
+    --accent: rgb(0, 200, 255);
+    --accentBG: rgba(0, 106, 255, 0.096);
+
+    --defaultPadding: 5px;
+}
+
+
 body{
     background-color: rgb(17, 17, 17);
-    color: rgba(255, 253, 250, 0.694);
+    color: var(--maintext);
     font-family:Urbanist ;
     margin: 0px;
     font-size: 20px;
+
 }
 .lessimportant{
-    color: rgba(255, 253, 250, 0.192);
+    color: var(--secondarytext);
 }
-::-moz-selection { /* Code for Firefox */
-    color: rgb(255, 153, 0);
-    background: rgba(255, 153, 0, 0.096);
-    border-radius: 4px;
-  }
-::selection {
-    color: rgb(255, 153, 0);
-    background: rgba(255, 153, 0, 0.096);
-  }
 
 a{
     text-decoration: none;
-    color: rgba(255, 255, 255, 0.694);
+    color: var(--maintext);
 }
 a:visited{
-    color: rgba(255, 255, 255, 0.694);
+    color: var(--maintext);
 }
 
 button{
     font-family:Urbanist, sans-serif;
     background-color: transparent;
-    border-color: rgba(255, 255, 255, 0.694);
-    color:rgba(255, 255, 255, 0.694);
+    color:var(--maintext);
     border-style: solid;
-    padding: 10px;
-    padding-left: 20px;
-    padding-right: 20px;
-    margin-left: 30px;
-    border-radius: 8px;
+    padding: 5px;
+    padding-left: var(--defaultPadding);
+    padding-right: var(--defaultPadding);
+    margin-left: var(--defaultPadding);
+    margin-right: var(--defaultPadding);
+    border-color: var(--maintext);
+    border-width: 1px;
+    border-radius: 4px;
     font-size: 15px;
     transition: 2s;
 }
@@ -56,51 +61,54 @@ main {
     flex-direction: column;
     align-items: center;
 }
-.navbar{
-    background-color: black;
-    padding: 15px;  
-    filter: drop-shadow(0px 0px 64px rgb(0, 0, 0.25));
-    border-bottom: black;
-    border-bottom-style: solid;
-    transition: 2s;
-    border-width: 2px;
+
+nav{
+    background-color: rgba(247, 247, 247, 0.066);
+    text-align:center;
+    margin-top: 25px;
+    width: fit-content;
+    margin-left: auto;
+    margin-right: auto;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 5px;
+    padding-right: 5px;
+
+    border-width: 1px;
+    border-style: solid;
+    border-color: rgba(255, 255, 255, 0.295);
+    border-top-color: rgba(255, 255, 255, 0.461);
+    border-radius: 4px;
 }
-.navbar-pink{
-    background-color: black;
-    padding: 15px;  
-    filter: drop-shadow(0px 0px 64px rgb(0, 0, 0.25));
-    border-bottom: black;
-    border-bottom-style: solid;
-    transition: 2s;
-    border-width: 2px;
+
+.langSelect{
+position: absolute;
+top:7.5px;
+right: 25px;
+height: 10px;
+width: 20px;
+transition: 0.5s;
 }
-.footer{
-    background-color: black;
-    padding: 20px;  
-    filter: drop-shadow(0px 0px 64px rgb(0, 0, 0.5));
-    border-bottom: black;
-    border-bottom-style: solid;
-    transition: 2s;
-    border-width: 2px;
+
+.langSelect:hover{
+    /* transform: scale(125%); */
+    transition: 0.1s;
+    background-color: rgba(247, 247, 247, 0.196);
 }
-.navbar:hover{
-    filter: drop-shadow(0px 0px 64px rgba(255, 153, 0, 0.613));
-    border-bottom: rgb(255, 153, 0);
-    border-bottom-style: solid;
-    transition: 1s;
-    background-color: rgba(0, 0, 0, 0.5);
-    border-width: 2px;
+
+.langSelect:active{
+    transform: scale(80%);
+    background-color: rgba(0, 0, 0, 0.196);
+    transition: 0.025s;
 
 }
-.navbar-pink:hover{
-    filter: drop-shadow(0px 0px 64px rgba(255, 0, 43, 0.613));
-    border-bottom: rgb(255, 0, 68);
-    border-bottom-style: solid;
-    transition: 1s;
-    background-color: rgba(0, 0, 0, 0.5);
-    border-width: 2px;
-
+.langSelect > img{
+position: absolute;
+right: 6px;
 }
+
+
+
 .urbanist-f {
     font-family: "Urbanist", sans-serif;
     font-optical-sizing: auto;
@@ -108,9 +116,8 @@ main {
     font-style: normal;
 }
 h1{
-    font-size: 85px;
-    margin: 0px;
-    margin-top: 85px;
+    font-size: 65px;
+    margin: 10px;
 }  
 h3{
     margin: 0px;
@@ -129,6 +136,12 @@ background: linear-gradient(90deg, rgba(255,255,255,0) 0%, #fff9f767 50%, rgba(2
 margin: 0 auto;
 
 }
+
+
+
+
+
+
 
 .shadow{
     filter: drop-shadow(0px 0px 16px rgb(0, 0, 0));
@@ -273,4 +286,15 @@ h2{
     width: 450px;
 margin-left: auto;
 margin-right: auto;
+}
+
+
+::-moz-selection { /* Code for Firefox */
+    color: rgb(0, 200, 255);
+    background: rgba(0, 106, 255, 0.096);
+    border-radius: 4px;
+  }
+::selection {
+    color: rgb(0, 200, 255);
+    background: rgba(0, 106, 255, 0.096);
 }
