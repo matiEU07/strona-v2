@@ -11,32 +11,131 @@
     <title>matiEP09</title>
 
     <script>
+
+        function mario(){
+            //===============-PRZYPISANIE ZMIENNYCH
+
+            const keys = {};
+
+            document.addEventListener('keydown', function(event) {
+                keys[event.key] = true;
+            });
+            document.addEventListener('keyup', function(event) {
+                keys[event.key] = false;
+            });
+
+            mario = document.getElementById('mario')
+            gameScale = 2
+
+            speedx = 0.0
+            speedy = 0.0
+
+            jumptimer = 0
+
+            runmultiplier = 0
+
+
+            x=300
+            y=800
+
+            //====================================--AKTUALIZOWANIE POZYCJI
+            function updatePos(newX, newY){
+                mario.style.left = String(newX)+'px'
+                mario.style.bottom = String(newY)+'px'
+                mario.style.display=''
+
+                x=newX
+                y=newY
+            }
+            function changePos(spX, spY){
+                if (y+spY>=0) {updatePos(x+spX, y+spY)}
+                else          {updatePos(x+spX, 0); speedy=0;}
+                
+            }
+            function getx(){
+                return(parseInt(mario.style.left.slice(0, -2)))
+            }
+            function gety(){
+                return(parseInt(mario.style.bottom.slice(0, -2)))
+            }
+            
+            //======================================================---FIZYKA
+            function physics(){ 
+                if (speedy < -25) {speedy=-25}
+
+                if (gety()>0) {speedy-=0.5}
+                if (gety()==0){jumptimer = 10}                
+
+                changePos(speedx, speedy)
+            }
+
+            //==================================================================----STEROWANIE
+            
+            function playerControls(){
+            if (keys['ArrowRight'] && speedx<3){speedx+=0.25; mario.style.transform = 'scaleX(-1)'}
+            if (keys['ArrowLeft']  && speedx>-3){speedx-=0.25; mario.style.transform = 'scaleX(1)'}
+            if (!keys['ArrowRight']&&!keys['ArrowLeft']&&speedx!=0){speedx=speedx-(speedx/Math.abs(speedx))*0.25}
+            
+            if  (keys['x']&&jumptimer>0) {speedy=10; jumptimer-=1} else if (gety()!=0) {jumptimer=0}
+
+            console.log(speedx)
+            console.log(speedx-(speedx/Math.abs(speedx)))
+            }
+            
+            //=====================================================================================-----GRAFIKA
+            
+            function draw(){
+                
+                if (speedx==0) pFrame=0.5; else pFrame+=Math.abs(speedx)/25 
+
+                if (speedy>0) mario.src='mario/spritesheet/mario17.png'
+                if (speedy<0) mario.src='mario/spritesheet/mario18.png'
+                if (speedy==0) mario.src='mario/spritesheet/mario'+Math.floor((pFrame%3)+1)+'.png'
+                
+            }
+
+
+            //===============================================================================================------pętla
+            setInterval(function() {
+                playerControls()
+                physics()
+                draw()
+            }, 10);
+        }
         function kibel(){
             var userLang = navigator.language;
             console.log(userLang)
 
             var flagIcon = document.getElementById('countryFlag')
-        
+            var intro = document.getElementById('introduction')
+            var info = document.getElementById('info')
+
             if (userLang!='pl')
             {
                 flagIcon.src='localised/en.png'
                 console.log('switching to en')
+
+                intro.textContent="Hi, I'm Mati! This site was mostly made for my youtube channel, though you can find some unrelated things like 3d models, or Trainz add-ons.."
+                info.textContent="Try clicking the buttons above to navigate the site!"
             }
             else
             {
                 flagIcon.src='localised/pl.png'
                 console.log('switching to pl')
 
+                intro.textContent="Cześć, jestem Mati. Ta strona jest głównie stworzona pod mój kanał na youtubie, lecz znajdziesz tu też inne rzeczy, jak darmowe modele 3d, lub dodatki do trainza."
+                info.textContent="Kliknij w przyciski powyżej by się nawigować po tej stronie!"
             }
-
+            mario();
         }
         window.onload = kibel;
+
     </script>
 
 <body>
 
     <nav>
-        <button>start</button><button><a href="trainz.html">trainz</a></button><button>3d models</button><button>tutorials</button><button><a href="sim.html">ShortLinesSim</a></button>
+        <button>start</button><button><a href="trainz.html">trainz</a></button><button id="3dModelString">3d models</button><button>tutorials</button><button><a href="sim.html">ShortLinesSim</a></button>
     </nav>
 
     <nav class="langSelect">
@@ -45,17 +144,21 @@
 
     <main>
     <h1>matiEP09</h1>
-    <h3>trainz • 3dModelling • gamedev</h3>
+    <!-- <h3>trainz • 3dModelling • gamedev</h3> -->
     <br>
     <div class="main">
-    this is the place where i will share all the things i want to be on the internet.<br> from open source apps, to trainz addons.<br>might as well throw some tutorials in for <redacted>[somoeone]</redacted>
-        <br><br><br>
-    try to click one of the links above to get started!
-    </main>
- 
+    <span id="introduction">if you see this text, it means javascript is disabled. it would be nice if you would enable it.</span>
+    <span id="info">try clicking the buttons above to get started!</span>
 
+    <div id="gamescreen" class="gamescreen">
+    <img src="mario/spritesheet/mario1.png" id="mario" class="mario pixel" style="left:0px; bottom: 500px;display: none; transform: scaleX(-1);">
+    </div>
+
+
+    <footer>
+        ©matiEP09
+    </footer>
 </div>
-<marquee scrollamount="120" loop="1" scrolldelay="61"><img src="en57.gif"></marquee>
 <!--i completely forgot how to write html and that shows.-->
 
 </body>

@@ -7,8 +7,6 @@
 
     --defaultPadding: 5px;
 }
-
-
 body{
     background-color: rgb(17, 17, 17);
     color: var(--maintext);
@@ -107,6 +105,25 @@ position: absolute;
 right: 6px;
 }
 
+footer{
+    position: fixed;
+    bottom: 0px;
+    left: 0px;
+    right: 0px;
+
+
+    background-color: rgba(247, 247, 247, 0.066);
+    text-align:center;
+    border-color: rgba(255, 255, 255, 0.295);
+    border-top-color: rgba(255, 255, 255, 0.461);
+    border-width: 1px;
+    border-radius: 4px;
+    border-style: solid;
+    padding-top: 4px;
+    padding-bottom: 4px;
+}
+
+
 
 
 .urbanist-f {
@@ -132,10 +149,43 @@ h3{
     height: 5.3px;
     background: rgb(255,255,255);
 background: linear-gradient(90deg, rgba(255,255,255,0) 0%, #fff9f767 50%, rgba(255,255,255,0) 100%);
-
 margin: 0 auto;
 
 }
+
+
+/* MARIO */
+.pixel{
+    image-rendering: pixelated;
+}
+.gamescreen{
+    height: 500px;
+    bottom: 33px;
+    left: 0px;
+    right: 0px;
+    position: absolute;
+}
+.mario{
+    height: 64px;
+    width: 32px;
+    position: absolute;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
