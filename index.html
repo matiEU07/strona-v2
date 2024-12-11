@@ -12,96 +12,150 @@
 
     <script>
 
-        function mario(){
-            //===============-PRZYPISANIE ZMIENNYCH
+function mario() {
+    //===============-PRZYPISANIE ZMIENNYCH
 
-            const keys = {};
+    const keys = {};
+    document.addEventListener('keydown', function (event) {
+        keys[event.key] = true;
+    });
+    document.addEventListener('keyup', function (event) {
+        keys[event.key] = false;
+    });
 
-            document.addEventListener('keydown', function(event) {
-                keys[event.key] = true;
-            });
-            document.addEventListener('keyup', function(event) {
-                keys[event.key] = false;
-            });
+    const mario = document.getElementById('mario');
+    const gameScale = 2;
+    const timeScale = 13;
 
-            mario = document.getElementById('mario')
-            gameScale = 2
+    let sprint = 1;
 
-            speedx = 0.0
-            speedy = 0.0
+    let speedx = 0.0;
+    let speedy = 0.0;
 
-            jumptimer = 0
+    let jumptimer = 0;
+    let runmultiplier = 0;
 
-            runmultiplier = 0
+    let x = 300;
+    let y = 800;
+    let lastTime = performance.now();
+    let pFrame = 0; // Added for animation tracking
 
+    //====================================--AKTUALIZOWANIE POZYCJI
+    function updatePos(newX, newY) {
+        mario.style.left = `${newX}px`;
+        mario.style.bottom = `${newY}px`;
+        mario.style.display = '';
 
-            x=300
-            y=800
+        x = newX;
+        y = newY;
+    }
 
-            //====================================--AKTUALIZOWANIE POZYCJI
-            function updatePos(newX, newY){
-                mario.style.left = String(newX)+'px'
-                mario.style.bottom = String(newY)+'px'
-                mario.style.display=''
-
-                x=newX
-                y=newY
-            }
-            function changePos(spX, spY){
-                if (y+spY>=0) {updatePos(x+spX, y+spY)}
-                else          {updatePos(x+spX, 0); speedy=0;}
-                
-            }
-            function getx(){
-                return(parseInt(mario.style.left.slice(0, -2)))
-            }
-            function gety(){
-                return(parseInt(mario.style.bottom.slice(0, -2)))
-            }
-            
-            //======================================================---FIZYKA
-            function physics(){ 
-                if (speedy < -25) {speedy=-25}
-
-                if (gety()>0) {speedy-=0.5}
-                if (gety()==0){jumptimer = 10}                
-
-                changePos(speedx, speedy)
-            }
-
-            //==================================================================----STEROWANIE
-            
-            function playerControls(){
-            if (keys['ArrowRight'] && speedx<3){speedx+=0.25; mario.style.transform = 'scaleX(-1)'}
-            if (keys['ArrowLeft']  && speedx>-3){speedx-=0.25; mario.style.transform = 'scaleX(1)'}
-            if (!keys['ArrowRight']&&!keys['ArrowLeft']&&speedx!=0){speedx=speedx-(speedx/Math.abs(speedx))*0.25}
-            
-            if  (keys['x']&&jumptimer>0) {speedy=10; jumptimer-=1} else if (gety()!=0) {jumptimer=0}
-
-            console.log(speedx)
-            console.log(speedx-(speedx/Math.abs(speedx)))
-            }
-            
-            //=====================================================================================-----GRAFIKA
-            
-            function draw(){
-                
-                if (speedx==0) pFrame=0.5; else pFrame+=Math.abs(speedx)/25 
-
-                if (speedy>0) mario.src='mario/spritesheet/mario17.png'
-                if (speedy<0) mario.src='mario/spritesheet/mario18.png'
-                if (speedy==0) mario.src='mario/spritesheet/mario'+Math.floor((pFrame%3)+1)+'.png'
-                
-            }
-
-
-            //===============================================================================================------pętla
-            setInterval(function() {
-                playerControls()
-                physics()
-                draw()
-            }, 10);
+    function changePos(spX, spY) {
+        if (y + spY >= 0) {
+            updatePos(x + spX, y + spY);
+        } else {
+            updatePos(x + spX, 0);
+            speedy = 0;
         }
+    }
+
+    function getx() {
+        return parseInt(mario.style.left.slice(0, -2));
+    }
+
+    function gety() {
+        return parseInt(mario.style.bottom.slice(0, -2));
+    }
+
+    //======================================================---FIZYKA
+    function physics(deltaTime) {
+
+        if (Math.abs(speedx)<0.25 && !keys['ArrowRight'] && !keys['ArrowLeft']) {
+            speedx=0
+        }
+
+        if (speedy < -25) {
+            speedy = -25;
+        }
+
+        if (gety() > 0) {
+            speedy -= 0.5 * (deltaTime / timeScale);
+        }
+
+        if (gety() === 0) {
+            jumptimer = 15;
+        }
+
+        changePos(speedx * (deltaTime / timeScale), speedy * (deltaTime / timeScale));
+    }
+
+    //==================================================================----STEROWANIE
+    function playerControls(deltaTime) {
+        if (keys['ArrowLeft'] && speedx > -3*sprint && !keys['ArrowRight']) {
+            speedx -= 0.125 * (deltaTime / timeScale);
+            mario.style.transform = 'scaleX(1)';
+        }
+        if (keys['ArrowRight'] && speedx < 3*sprint && !keys['ArrowLeft']) {
+            speedx += 0.125 * (deltaTime / timeScale);
+            mario.style.transform = 'scaleX(-1)';
+        }
+
+        if (!keys['ArrowRight'] && !keys['ArrowLeft'] && speedx !== 0 || keys['ArrowRight'] && keys['ArrowLeft'] && speedx !==0) {
+            console.log("slow: "+Math.abs(speedx))
+
+            speedx -= (speedx / Math.abs(speedx)) * 0.125 * (deltaTime / timeScale);
+            if (Math.abs(speedx)<0.2){
+                console.log("STOPPING: "+Math.abs(speedx))
+
+                speedx=0
+            }
+        }
+
+        if (Math.abs(speedx)>3*sprint) {speedx-=0.125*(speedx/Math.abs(speedx))*(deltaTime / timeScale);}
+
+        if (keys['x'] && jumptimer > 0) {
+            speedy = 8;
+            jumptimer -= 1;
+        } else if (gety() !== 0) {
+            jumptimer = 0;
+        }
+
+        if (keys['z']) sprint = 2; else sprint = 1
+    }
+
+    //=====================================================================================-----GRAFIKA
+    function draw() {
+        if (speedx === 0) {
+            pFrame = 0.5;
+        } else {
+            pFrame += Math.abs(speedx) / 35;
+        }
+
+        if (speedy > 0) {
+            mario.src = 'mario/spritesheet/mario17.png';
+        } else if (speedy < 0) {
+            mario.src = 'mario/spritesheet/mario18.png';
+        } else {
+            mario.src = `mario/spritesheet/mario${Math.floor((pFrame % 3) + 1)}.png`;
+        }
+    }
+
+    //===============================================================================================------GRA
+    function gameLoop(currentTime) {
+        const deltaTime = currentTime - lastTime;
+        lastTime = currentTime;
+
+        playerControls(deltaTime);
+        physics(deltaTime);
+        draw();
+
+        requestAnimationFrame(gameLoop);
+    }
+
+    // Start the game loop
+    requestAnimationFrame(gameLoop);
+}
+
         function kibel(){
             var userLang = navigator.language;
             console.log(userLang)
@@ -185,7 +239,7 @@
         <img src="mario/spritesheet/mario28.png">
         <img src="mario/spritesheet/mario29.png">
         <img src="mario/spritesheet/mario30.png">
-
+        <img src="mario/tileset/block.png">
 
     </div>
 
