@@ -12,9 +12,52 @@
 
     <script>
 
-function mario() {
-    //===============-PRZYPISANIE ZMIENNYCH
+let defaultLevel=[
+"                                         ",
+"                                         ",
+"                 111111111111111111111111",
+"                11   11111111111111111111",
+"111111  11 1  111   11111111111111111111",
+]
+defaultLevel = defaultLevel.reverse()
+console.log(defaultLevel)
+function generateLevel(level){
+    const gamescreen = document.getElementById('gamescreen');
+    console.log("new line")
 
+for (let o=0; o<level.length; o++)
+{   
+    
+    for (let i = 0; i < level[o].length; i++) {
+        if(level[o][i]!=0 || level[o][i]!=" "){
+        gamescreen.innerHTML += '<img src=mario/tileset/'+level[o][i]+'.png class="pixel block"'+'style="left:'+i*32+'px; bottom: '+o*32+'px;"'+'>'
+    }}
+    console.log("new line")
+}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+function mario(level) {
+    //===============-PRZYPISANIE ZMIENNYCH
+    generateLevel(level);
     const keys = {};
     document.addEventListener('keydown', function (event) {
         keys[event.key] = true;
@@ -35,8 +78,14 @@ function mario() {
     let jumptimer = 0;
     let runmultiplier = 0;
 
+    let solid = 0
+
     let x = 300;
     let y = 800;
+
+    let tilex = 0
+    let tiley = 0
+
     let lastTime = performance.now();
     let pFrame = 0; // Added for animation tracking
 
@@ -49,13 +98,13 @@ function mario() {
         x = newX;
         y = newY;
     }
-
+    
     function changePos(spX, spY) {
-        if (y + spY >= 0) {
-            updatePos(x + spX, y + spY);
-        } else {
-            updatePos(x + spX, 0);
+        if (checkForFloor(tilex, toTile(y + spY))) {
+            updatePos(x + spX, y);
             speedy = 0;
+        } else {
+            updatePos(x + spX, y + spY);
         }
     }
 
@@ -67,6 +116,23 @@ function mario() {
         return parseInt(mario.style.bottom.slice(0, -2));
     }
 
+    function getTilexy() {
+        tilex = Math.floor(Math.round(getx())/32)
+        tiley = Math.floor(Math.round(gety())/32)
+        console.log(tilex+'     '+tiley)
+    }
+
+    function toTile(x){
+        return(Math.floor(Math.round(x)/32))
+    }
+    function checkForFloor(q, w)
+    {
+        if (w < level.length-2 && w >= 0) {
+            if (level[w][q] == " " || level[w][q+1] == " ") { return false; console.log(level[w][q] == " "|| level[w][q+1] == " ")}
+            else { return true }
+        }
+        else {return false}
+    }
     //======================================================---FIZYKA
     function physics(deltaTime) {
 
@@ -74,15 +140,31 @@ function mario() {
             speedx=0
         }
 
-        if (speedy < -25) {
-            speedy = -25;
+        getTilexy()
+
+        if (tiley<level.length && tiley>=0){
+            if (level[tiley][tilex]!==' '||level[tiley][tilex+1]!==' ')
+            {solid=true}
+            else
+            {solid=false}
+        }
+        else{
+            solid=false
         }
 
-        if (gety() > 0) {
+    console.log(solid)
+
+        // console.log(Math.floor(Math.round(getx())/32))
+
+        if (speedy < -2) {
+            speedy = -2;
+        }
+
+        if (!solid) {
             speedy -= 0.5 * (deltaTime / timeScale);
         }
 
-        if (gety() === 0) {
+        if (solid) {
             jumptimer = 15;
         }
 
@@ -100,13 +182,11 @@ function mario() {
             mario.style.transform = 'scaleX(-1)';
         }
 
-        if (!keys['ArrowRight'] && !keys['ArrowLeft'] && speedx !== 0 || keys['ArrowRight'] && keys['ArrowLeft'] && speedx !==0) {
+        if (!keys['ArrowRight'] && !keys['ArrowLeft'] && speedx !== 0 && speedy == 0|| keys['ArrowRight'] && keys['ArrowLeft'] && speedx !==0) {
             console.log("slow: "+Math.abs(speedx))
 
             speedx -= (speedx / Math.abs(speedx)) * 0.125 * (deltaTime / timeScale);
             if (Math.abs(speedx)<0.2){
-                console.log("STOPPING: "+Math.abs(speedx))
-
                 speedx=0
             }
         }
@@ -116,7 +196,7 @@ function mario() {
         if (keys['x'] && jumptimer > 0) {
             speedy = 8;
             jumptimer -= 1;
-        } else if (gety() !== 0) {
+        } else if (!solid) {
             jumptimer = 0;
         }
 
@@ -180,11 +260,44 @@ function mario() {
                 intro.textContent="Cześć, jestem Mati. Ta strona jest głównie stworzona pod mój kanał na youtubie, lecz znajdziesz tu też inne rzeczy, jak darmowe modele 3d, lub dodatki do trainza."
                 info.textContent="Kliknij w przyciski powyżej by się nawigować po tej stronie!"
             }
-            mario();
+            mario(defaultLevel);
         }
         window.onload = kibel;
 
     </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 <body>
 
@@ -239,7 +352,7 @@ function mario() {
         <img src="mario/spritesheet/mario28.png">
         <img src="mario/spritesheet/mario29.png">
         <img src="mario/spritesheet/mario30.png">
-        <img src="mario/tileset/block.png">
+        <img src="mario/tileset/1.png">
 
     </div>
 

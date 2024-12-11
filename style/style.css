@@ -170,7 +170,11 @@ margin: 0 auto;
     width: 32px;
     position: absolute;
 }
-
+.block{
+    height: 32px;
+    width: 32px;
+    position: absolute;
+}
 
 
 
