@@ -13,7 +13,6 @@ body{
     font-family:Urbanist ;
     margin: 0px;
     font-size: 20px;
-
 }
 .lessimportant{
     color: var(--secondarytext);
@@ -50,8 +49,9 @@ button:hover{
     transition: 0.25s;
 }
 button:active{
+    color: #269e6c6f;
     color:rgb(122, 122, 122);
-    background-color: transparent;
+    background-color: transparent; 
     border-color: rgb(122, 122, 122);
 }
 main {
