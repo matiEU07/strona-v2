@@ -13,11 +13,12 @@
     <script>
 
 let defaultLevel=[
-"                                         ",
-"                                         ",
-"                 111111111111111111111111",
-"                11   11111111111111111111",
-"111111  11 1  111   11111111111111111111",
+"  111  1111  1111 111                                                      ",
+"   1   1     1     1                                                       ",
+"   1   1111  1111  1                                                       ",
+"   1   1        1  1                                                       ",
+"   1   1111  1111  1                                                       ",
+"111111111111111111111111111111111111111111111    111                       ",
 ]
 defaultLevel = defaultLevel.reverse()
 console.log(defaultLevel)
@@ -144,7 +145,12 @@ function mario(level) {
 
         if (tiley<level.length && tiley>=0){
             if (level[tiley][tilex]!==' '||level[tiley][tilex+1]!==' ')
-            {solid=true}
+            {
+                solid=true
+                updatePos(getx(), (tiley+1)*32);
+                console.log("moved to:"+tiley)
+                speedy=0;
+            }
             else
             {solid=false}
         }
@@ -156,8 +162,8 @@ function mario(level) {
 
         // console.log(Math.floor(Math.round(getx())/32))
 
-        if (speedy < -2) {
-            speedy = -2;
+        if (speedy < -16) {
+            speedy = -16;
         }
 
         if (!solid) {
@@ -213,9 +219,11 @@ function mario(level) {
 
         if (speedy > 0) {
             mario.src = 'mario/spritesheet/mario17.png';
-        } else if (speedy < 0) {
+        } else if (speedy < -0.5) {
             mario.src = 'mario/spritesheet/mario18.png';
-        } else {
+            console.log(speedy)
+        }
+        else {
             mario.src = `mario/spritesheet/mario${Math.floor((pFrame % 3) + 1)}.png`;
         }
     }
