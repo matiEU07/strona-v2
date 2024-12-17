@@ -68,6 +68,7 @@ function mario(level) {
     });
 
     const mario = document.getElementById('mario');
+    const playerWidth = 14;
     const gameScale = 2;
     const timeScale = 13;
 
@@ -92,7 +93,7 @@ function mario(level) {
 
     //====================================--AKTUALIZOWANIE POZYCJI
     function updatePos(newX, newY) {
-        mario.style.left = `${newX}px`;
+        mario.style.left = `${newX-16}px`;
         mario.style.bottom = `${newY}px`;
         mario.style.display = '';
 
@@ -101,16 +102,28 @@ function mario(level) {
     }
     
     function changePos(spX, spY) {
-        if (checkForFloor(tilex, toTile(y + spY))) {
+
+        if (toTile(y + spY)+1<level.length && toTile(y + spY)+1>=0 && speedx!=0){
+                if (level[toTile(y + spY)+1][toTile(x + spX)]!==' ')
+                    {
+                        console.log(toTile(x + spX)+(speedx/Math.abs(speedx)))
+                        console.log(speedx/Math.abs(speedx))
+                        spX=0;
+                    }
+        }
+
+        if (checkForFloor()) {
             updatePos(x + spX, y);
             speedy = 0;
         } else {
             updatePos(x + spX, y + spY);
         }
+
+        
     }
 
     function getx() {
-        return parseInt(mario.style.left.slice(0, -2));
+        return parseInt((mario.style.left.slice(0, -2)));
     }
 
     function gety() {
@@ -118,19 +131,17 @@ function mario(level) {
     }
 
     function getTilexy() {
-        tilex = Math.floor(Math.round(getx())/32)
+        tilex = Math.floor(Math.round(x)/32)
         tiley = Math.floor(Math.round(gety())/32)
-        console.log(tilex+'     '+tiley)
     }
 
     function toTile(x){
         return(Math.floor(Math.round(x)/32))
     }
-    function checkForFloor(q, w)
+    function checkForFloor()
     {
-        if (w < level.length-2 && w >= 0) {
-            if (level[w][q] == " " || level[w][q+1] == " ") { return false; console.log(level[w][q] == " "|| level[w][q+1] == " ")}
-            else { return true }
+        if (tiley < level.length-2 && tiley >= 0) {
+            if (level[tiley][toTile(x-playerWidth)] == " " || level[tiley][toTile(x+playerWidth)] == " ") { return false;} else { return true }
         }
         else {return false}
     }
@@ -144,12 +155,13 @@ function mario(level) {
         getTilexy()
 
         if (tiley<level.length && tiley>=0){
-            if (level[tiley][tilex]!==' '||level[tiley][tilex+1]!==' ')
+            if (level[tiley][toTile(x-playerWidth)]!==' '||level[tiley][toTile(x+playerWidth)]!==' ')
             {
                 solid=true
-                updatePos(getx(), (tiley+1)*32);
+                updatePos(x, ((tiley+1)*32));
                 console.log("moved to:"+tiley)
                 speedy=0;
+                jumptimer = 20;
             }
             else
             {solid=false}
@@ -157,10 +169,6 @@ function mario(level) {
         else{
             solid=false
         }
-
-    console.log(solid)
-
-        // console.log(Math.floor(Math.round(getx())/32))
 
         if (speedy < -16) {
             speedy = -16;
@@ -170,9 +178,9 @@ function mario(level) {
             speedy -= 0.5 * (deltaTime / timeScale);
         }
 
-        if (solid) {
-            jumptimer = 15;
-        }
+
+
+
 
         changePos(speedx * (deltaTime / timeScale), speedy * (deltaTime / timeScale));
     }
