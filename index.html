@@ -13,12 +13,12 @@
     <script>
 
 let defaultLevel=[
-"  111  1111  1111 111                                                      ",
-"   1   1     1     1                                                       ",
-"   1   1111  1111  1                                                       ",
-"   1   1        1  1                                                       ",
-"   1   1111  1111  1                                                       ",
-"111111111111111111111111111111111111111111111    111                       ",
+"  111 1111 1111 111                                                      ",
+"   1  1    1     1                                                       ",
+"   1  1111 1111  1        1111111                                        ",
+"   1  1       1  1                                                       ",
+"   1  1111 1111  1                                                       ",
+"111111111111111111111111111111111111111111111    111                     ",
 ]
 defaultLevel = defaultLevel.reverse()
 console.log(defaultLevel)
@@ -69,6 +69,7 @@ function mario(level) {
 
     const mario = document.getElementById('mario');
     const playerWidth = 14;
+    const playerHeight = 32;
     const gameScale = 2;
     const timeScale = 13;
 
@@ -104,7 +105,14 @@ function mario(level) {
     function changePos(spX, spY) {
 
         if (toTile(y + spY)+1<level.length && toTile(y + spY)+1>=0 && speedx!=0){
-                if (level[toTile(y + spY)+1][toTile(x + spX + playerWidth*(speedx/Math.abs(speedx)))]!==' ')
+                if (level[toTile(y + spY+1)][toTile(x + spX + playerWidth*(speedx/Math.abs(speedx)))]!==' ')
+                    {
+                        console.log(toTile(x + spX)+(speedx/Math.abs(speedx)))
+                        console.log(speedx/Math.abs(speedx))
+                        spX=0;
+                        speedx=0
+                    }
+                    if (level[toTile(y + spY+playerHeight)][toTile(x + spX + playerWidth*(speedx/Math.abs(speedx)))]!==' ')
                     {
                         console.log(toTile(x + spX)+(speedx/Math.abs(speedx)))
                         console.log(speedx/Math.abs(speedx))
