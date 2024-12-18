@@ -104,11 +104,12 @@ function mario(level) {
     function changePos(spX, spY) {
 
         if (toTile(y + spY)+1<level.length && toTile(y + spY)+1>=0 && speedx!=0){
-                if (level[toTile(y + spY)+1][toTile(x + spX)]!==' ')
+                if (level[toTile(y + spY)+1][toTile(x + spX + playerWidth*(speedx/Math.abs(speedx)))]!==' ')
                     {
                         console.log(toTile(x + spX)+(speedx/Math.abs(speedx)))
                         console.log(speedx/Math.abs(speedx))
                         spX=0;
+                        speedx=0
                     }
         }
 
@@ -228,9 +229,8 @@ function mario(level) {
 
         if (speedy > 0) {
             mario.src = 'mario/spritesheet/mario17.png';
-        } else if (speedy < -0.5) {
+        } else if (speedy < -0.7) {
             mario.src = 'mario/spritesheet/mario18.png';
-            console.log(speedy)
         }
         else {
             mario.src = `mario/spritesheet/mario${Math.floor((pFrame % 3) + 1)}.png`;
