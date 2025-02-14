@@ -14,6 +14,55 @@ body{
     margin: 0px;
     font-size: 20px;
 }
+
+nav{
+    background-color: rgba(247, 247, 247, 0.066);
+    text-align:center;
+    margin-top: 25px;
+    width: fit-content;
+    margin-left: auto;
+    margin-right: auto;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 5px;
+    padding-right: 5px;
+
+    border-width: 1px;
+    border-style: solid;
+    border-color: rgba(255, 255, 255, 0.295);
+    border-top-color: rgba(255, 255, 255, 0.461);
+    border-radius: 4px;
+}
+
+.langSelect{
+    position: absolute;
+    top:7.5px;
+    right: 25px;
+    height: 10px;
+    width: 20px;
+    transition: 0.5s;
+}
+.langSelect:hover{
+    /* transform: scale(125%); */
+    transition: 0.1s;
+    background-color: rgba(247, 247, 247, 0.196);
+}
+
+.langSelect:active{
+    transform: scale(80%);
+    background-color: rgba(0, 0, 0, 0.196);
+    transition: 0.025s;
+}
+.langSelect > img{
+    position: absolute;
+    right: 6px;
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
 .lessimportant{
     color: var(--secondarytext);
 }
@@ -53,78 +102,8 @@ button:active{
     color:rgb(122, 122, 122);
     background-color: transparent; 
     border-color: rgb(122, 122, 122);
+    transform: scale(0.9);
 }
-main {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-nav{
-    background-color: rgba(247, 247, 247, 0.066);
-    text-align:center;
-    margin-top: 25px;
-    width: fit-content;
-    margin-left: auto;
-    margin-right: auto;
-    padding-top: 10px;
-    padding-bottom: 10px;
-    padding-left: 5px;
-    padding-right: 5px;
-
-    border-width: 1px;
-    border-style: solid;
-    border-color: rgba(255, 255, 255, 0.295);
-    border-top-color: rgba(255, 255, 255, 0.461);
-    border-radius: 4px;
-}
-
-.langSelect{
-position: absolute;
-top:7.5px;
-right: 25px;
-height: 10px;
-width: 20px;
-transition: 0.5s;
-}
-
-.langSelect:hover{
-    /* transform: scale(125%); */
-    transition: 0.1s;
-    background-color: rgba(247, 247, 247, 0.196);
-}
-
-.langSelect:active{
-    transform: scale(80%);
-    background-color: rgba(0, 0, 0, 0.196);
-    transition: 0.025s;
-
-}
-.langSelect > img{
-position: absolute;
-right: 6px;
-}
-
-footer{
-    position: fixed;
-    bottom: 0px;
-    left: 0px;
-    right: 0px;
-
-
-    background-color: rgba(247, 247, 247, 0.066);
-    text-align:center;
-    border-color: rgba(255, 255, 255, 0.295);
-    border-top-color: rgba(255, 255, 255, 0.461);
-    border-width: 1px;
-    border-radius: 4px;
-    border-style: solid;
-    padding-top: 4px;
-    padding-bottom: 4px;
-}
-
-
-
 
 .urbanist-f {
     font-family: "Urbanist", sans-serif;
@@ -132,6 +111,7 @@ footer{
     font-weight: 100;
     font-style: normal;
 }
+
 h1{
     font-size: 65px;
     margin: 10px;
@@ -211,10 +191,7 @@ margin: 0 auto;
 }
 .main{width: 40%;}
 .mainwide{width: 75%;}
-redacted{
-    color:black;
-    background-color: black;
-}
+
 .no-margin{
     margin: 0px !important;
 }
@@ -242,6 +219,9 @@ content {
     align-items: center;
     height: 100vh;
 }
+
+
+/*===TRAINZ CONTAINER===*/
 
 .container {
     display: flex;
@@ -303,35 +283,8 @@ content {
     cursor: pointer;
     border: 2px solid rgba(255, 255, 255, 0.694);
 }
-.banner{
 
-        background-image: url("sim/whoturnedoffthelights.png");
-        background-repeat: no-repeat;
-        background-attachment: fixed;
-        margin: 0px;
-        height: 512px;
-        background-size: 100% auto;
-        background-color: rgb(0, 0, 0);
 
-}
-
-.simcontent{
-    background-image: url("sim/dark.png");
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-    margin: 0px;
-
-    background-size: 100% auto;
-
-}
-.simdownload{
-    background-image: url("sim/trackview.png");
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-    margin: 0px;
-
-    background-size: 100% auto;
-}
 h2{
     margin-top: 0px;
 }
@@ -339,6 +292,24 @@ h2{
     width: 450px;
 margin-left: auto;
 margin-right: auto;
+}
+
+footer{
+    position: fixed;
+    bottom: 0px;
+    left: 0px;
+    right: 0px;
+
+
+    background-color: rgba(247, 247, 247, 0.066);
+    text-align:center;
+    border-color: rgba(255, 255, 255, 0.295);
+    border-top-color: rgba(255, 255, 255, 0.461);
+    border-width: 1px;
+    border-radius: 4px;
+    border-style: solid;
+    padding-top: 4px;
+    padding-bottom: 4px;
 }
 
 
