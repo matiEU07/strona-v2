@@ -159,23 +159,6 @@ margin: 0 auto;
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 .shadow{
     filter: drop-shadow(0px 0px 16px rgb(0, 0, 0));
 }
@@ -190,16 +173,14 @@ margin: 0 auto;
     width: max-content;
 }
 .main{width: 40%;}
-.mainwide{width: 75%;}
-
+.main.wide{width: 75%;}
+.main.full{width: 100%;}
 .no-margin{
     margin: 0px !important;
 }
 .content{
     background-color: black;
 }
-
-
 .container:hover{
     border-color: rgb(255, 153, 0);
     transition: 0.2s;
@@ -213,14 +194,27 @@ margin: 0 auto;
     padding: 0;
 }
 
-content {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
+
+
+/*===NEW TRAINZ CONTAINERS*/
+#content.trainz{
+width: 100%;
 }
-
-
+.trainzElementBG{
+    width: 100%;
+    height: 200px;
+    background-image: url("https://img.freepik.com/free-vector/dynamic-gradient-grainy-background_23-2148963687.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.trainzElementTitle{
+margin-left: 25%;
+padding-top: 25px;
+font-weight: bolder;
+}
+.trainzElementContent{
+    
+}
 /*===TRAINZ CONTAINER===*/
 
 .container {
