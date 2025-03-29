@@ -1,0 +1,32 @@
+:root{
+    --defaultpadding: 4px;
+}
+body{
+    background-color: rgb(26, 26, 26);
+    color: rgb(174, 174, 174);
+    margin: 0px;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    position: relative;
+}
+nav{
+    background-color: rgb(58, 58, 58);
+    padding: 0px;
+    color: rgb(174, 174, 174);
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 32px;
+    line-height: 32px;
+}
+button{
+    background-color: rgba(26, 26, 26, 0);
+    border: none;
+    color: rgb(174, 174, 174);
+}
+button:hover{
+   color: white; 
+}
+canvas{
+    display: block;
+    image-rendering: pixelated;
+}
