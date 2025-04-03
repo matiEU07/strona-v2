@@ -1,5 +1,5 @@
 :root{
-    --defaultpadding: 4px;
+    --defaultpadding: 8px;
 }
 
 @font-face {
@@ -42,7 +42,7 @@ nav{
     right: var(--defaultpadding);
 }
 button{
-    background-color: rgba(26, 26, 26, 0);
+    background-color: transparent;
     border: none;
     color: rgb(174, 174, 174);
     font-size: 16px;
@@ -54,4 +54,40 @@ button:hover{
 canvas{
     display: block;
     image-rendering: pixelated;
+}
+
+.toolbox{
+    position: absolute;
+    bottom: 0px;
+    width: 100%;
+    background-color: rgb(36, 36, 36);
+    box-shadow: black 0px 0px 5px;
+    height: 25%;
+}
+.toolbox #title{
+    background-color: rgb(58, 58, 58);
+    font-size: 16px;
+    padding-left: var(--defaultpadding);
+    height: 24px;
+    line-height: 24px;
+    transition: 0.5s;
+}
+.toolbox #title:hover{
+    background-color: rgb(70, 70, 70);
+}
+.toolbox .main{
+    display: flex;
+    width: 100%;
+    height: calc(100% - 24px);
+}
+.toolbox .left{
+    border-right: rgb(70, 70, 70) 1px solid;
+    width: calc(256px - var(--defaultpadding));
+    height: calc(100% - var(--defaultpadding));
+    padding-top: var(--defaultpadding);
+    padding-left: var(--defaultpadding);
+}
+
+input {
+    accent-color: rgb(160, 65, 255);
 }

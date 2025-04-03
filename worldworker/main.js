@@ -5,23 +5,43 @@ var stats = document.getElementById('stats')
 addEventListener("resize", (event) => {});  //refresh on resize
 addEventListener("wheel", (event) => {});   //move around with mouse wheel
 
-
-
-
-
+var activeElements=["BLOCK ELEMENTS", "SCENERY ELEMENTS", "BONUS ELEMENTS", "NPC ELEMENTS", "CUSTOM TILE ELEMENTS", "CUSTOM SCENERY ELEMENTS"]
+activeElements.forEach(element => {
+    console.log(element)
+    checkbox = document.querySelector(`[id='${element}']`);
+    checkbox.checked = true;
+}) 
 canvas.width = window.innerWidth
 canvas.height = window.innerHeight
 
 var c = canvas.getContext('2d')
+var cursor = new Image()
+    cursor.src = 'tiles/select.png'
+var mouseX = 0
+var mouseY = 0
 
 //create tile class
-function Tile(x, y, type){
-    var tile = new Image();
-    tile.src = 'tiles/'+type+'.png';
+function Tile(x, y, image, type){
+    var tile = new Image()
+    tile.src = 'tiles/'+image+'.png'
+    this.type = type
     this.x = x
     this.y = y
+    this.hovered = false;
+
+    this.setNewImage = function(){
+        tile.src = 'tiles/1.png'
+    }
+
     this.draw = function(cmx, cmy){
+        if (activeElements.includes(this.type)){
         c.drawImage(tile, x-cmx, y-cmy, 32, 32)
+        if (this.hovered) {
+            c.drawImage(cursor, x-cmx, y-cmy, 32, 32)
+            // c.fillStyle = "rgba(255, 255, 255, 0.5)"; // Brighter overlay
+            // c.fillRect(this.x - cmx, this.y - cmy, 32, 32);
+        }
+        }
     }
 }
 //create level class
@@ -39,17 +59,31 @@ function Level(name, name2, name3, time, description, author, mail, site, width,
     this.site = site
 
     var tileArray = []
-    this.addTile = function(x, y, type) {
-        tileArray.push(new Tile(x, y, type))
+    this.addTile = function(x, y, image, type) {
+        tileArray.push(new Tile(x, y, image, type))
     }
     this.clearTiles = function(){
         tileArray.pop()
     }
     this.display = function() {
-        canvas.width = window.innerWidth
-        canvas.height = window.innerHeight
-        tileArray.forEach((element) => element.draw(cmx,cmy));
+        if (cmx<0) cmx=0
+        c.clearRect(0, 0, canvas.width, canvas.height);
+        tileArray.forEach((element) => element.draw(cmx,cmy))
         stats.textContent=this.name
+    }
+    this.refreshTiles = function() {
+        tileArray.forEach((element) => element.setNewImage())
+    }
+    this.getTile=function(){
+        tileArray.forEach(tile => {
+            tile.hovered = ( 
+                mouseX > tile.x-cmx && 
+                mouseX < tile.x-cmx + 32 && 
+                mouseY > tile.y-cmy && 
+                mouseY < tile.y-cmy + 32);
+            
+    });
+        this.display();
     }
 }
 
@@ -65,7 +99,6 @@ currentLevel.display()
 
 onwheel = (event) => {
     cmx = cmx+(16 * (event.deltaY / Math.abs(event.deltaY)))
-    c.clearRect(0, 0, canvas.width, canvas.height);
     currentLevel.display()
 };
 
@@ -77,9 +110,17 @@ addEventListener('keydown', (event) => {
         case "ArrowUp"    : cmy-=8; break;
         case "ArrowDown"  : cmy+=8; break;
     }
-    c.clearRect(0, 0, canvas.width, canvas.height);
     currentLevel.display()
 });
+
+canvas.addEventListener("mousemove", function (event) {
+    let rect = canvas.getBoundingClientRect()
+    mouseX = event.clientX - rect.left
+    mouseY = event.clientY - rect.top
+    })
+canvas.addEventListener("click", function(event){
+    currentLevel.getTile()
+})
 
 //loading levels
 function Load(){
@@ -144,7 +185,7 @@ function Load(){
                         case "BLOCK ELEMENTS": {
                             var [key, value] = line.split("=");
                             if (currentKey != key){
-                                currentLevel.addTile(x, y, "1")
+                                currentLevel.addTile(x, y, "1", currentSection)
                                 currentKey=key
                             }
                             if (currentKey.endsWith("x")){
@@ -158,7 +199,7 @@ function Load(){
                         case "SCENERY ELEMENTS": {
                             var [key, value] = line.split("=");
                             if (currentKey != key){
-                                currentLevel.addTile(x, y, "s")
+                                currentLevel.addTile(x, y, "s", currentSection)
                                 currentKey=key
                             }
                             if (currentKey.endsWith("x")){
@@ -172,7 +213,7 @@ function Load(){
                         case "BONUS ELEMENTS": {
                             var [key, value] = line.split("=");
                             if (currentKey != key){
-                                currentLevel.addTile(x, y, "b")
+                                currentLevel.addTile(x, y, "b", currentSection)
                                 currentKey=key
                             }
                             if (currentKey.endsWith("x")){
@@ -186,7 +227,35 @@ function Load(){
                         case "NPC ELEMENTS": {
                             var [key, value] = line.split("=");
                             if (currentKey != key){
-                                currentLevel.addTile(x, y, "e")
+                                currentLevel.addTile(x, y, "e", currentSection)
+                                currentKey=key
+                            }
+                            if (currentKey.endsWith("x")){
+                                x=value
+                            }
+                            if (currentKey.endsWith("y")){
+                                 y=value
+                            }
+                            currentKey=key; break
+                        }
+                        case "CUSTOM TILE ELEMENTS": {
+                            var [key, value] = line.split("=");
+                            if (currentKey != key){
+                                currentLevel.addTile(x, y, "c", currentSection)
+                                currentKey=key
+                            }
+                            if (currentKey.endsWith("x")){
+                                x=value
+                            }
+                            if (currentKey.endsWith("y")){
+                                 y=value
+                            }
+                            currentKey=key; break
+                        }
+                        case "CUSTOM SCENERY ELEMENTS": {
+                            var [key, value] = line.split("=");
+                            if (currentKey != key){
+                                currentLevel.addTile(x, y, "cs", currentSection)
                                 currentKey=key
                             }
                             if (currentKey.endsWith("x")){
@@ -214,4 +283,16 @@ function Load(){
  
 
 input.click();
+}
+//editing levels
+function changeView(type){
+    if (activeElements.includes(type))
+    {
+        activeElements.splice(activeElements.indexOf(type), 1)
+    }
+    else
+    {
+        activeElements.push(type)
+    }
+    currentLevel.display()
 }

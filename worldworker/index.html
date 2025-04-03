@@ -7,8 +7,21 @@
     <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-    <nav>WORLD WORKER <button onclick="Load()">open</button><button onclick="">edit</button> <span id="stats">no level is currently open.</span>   </nav>
+    <nav>WORLD WORKER <button onclick="Load()">open</button><button onclick="">edit</button><button onclick="">view</button> <span id="stats">no level is currently open.</span>   </nav>
     <canvas></canvas>
-    <script src="main.js"></script>
+    <div class="toolbox">
+        <div id="title">toolbox</div>
+        <div class="main">
+            <div class="left">
+                <div class="option"><input type="checkbox" id='BLOCK ELEMENTS' onchange='changeView("BLOCK ELEMENTS")'>Block Elements</div>
+                <div class="option"><input type="checkbox" id='SCENERY ELEMENTS' onchange='changeView("SCENERY ELEMENTS")'>Scenerey Elements</div>
+                <div class="option"><input type="checkbox" id='BONUS ELEMENTS' onchange='changeView("BONUS ELEMENTS")'>Bonus Elements</div>
+                <div class="option"><input type="checkbox" id='NPC ELEMENTS' onchange='changeView("NPC ELEMENTS")'>NPC Elements</div>
+                <div class="option"><input type="checkbox" id='CUSTOM TILE ELEMENTS' onchange='changeView("CUSTOM TILE ELEMENTS")'>Custom Tile Elements</div>
+                <div class="option"><input type="checkbox" id='CUSTOM SCENERY ELEMENTS' onchange='changeView("CUSTOM SCENERY ELEMENTS")'>Custom Scenery Elements</div>
+            </div>
+        </div>
+    </div>
 </body>
 </html>
+<script src="main.js"></script>
