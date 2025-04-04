@@ -21,7 +21,7 @@ var mouseX = 0
 var mouseY = 0
 
 //create tile class
-function Tile(x, y, image, type, key){
+function Tile(x, y, image, type, key, set){
     var tile = new Image()
     tile.src = 'tiles/'+image+'.png'
     this.type = type
@@ -29,6 +29,7 @@ function Tile(x, y, image, type, key){
     this.y = y
     this.hovered = false;
     this.name = key
+    this.set = set
 
     this.setNewImage = function(image){
         tile.src = 'tiles/'+image+'.png'
@@ -60,8 +61,8 @@ function Level(name, name2, name3, time, description, author, mail, site, width,
     this.site = site
 
     var tileArray = []
-    this.addTile = function(x, y, image, type, key) {
-        tileArray.push(new Tile(x, y, image, type, key))
+    this.addTile = function(x, y, image, type, key, set) {
+        tileArray.push(new Tile(x, y, image, type, key, set))
     }
     this.clearTiles = function(){
         tileArray.pop()
@@ -81,7 +82,8 @@ function Level(name, name2, name3, time, description, author, mail, site, width,
                 mouseX > tile.x-cmx && 
                 mouseX < tile.x-cmx + 32 && 
                 mouseY > tile.y-cmy && 
-                mouseY < tile.y-cmy + 32);
+                mouseY < tile.y-cmy + 32
+            )
         })
         currentLevel.display()
     }
@@ -170,21 +172,17 @@ function Load(){
                 var tile = ""
                 var x = 0
                 var y = 0
+                var set = null
                 var currentKey = ""
 
                 function addTiles(line, image){
-                    var [key, value] = line.split("=");
-                    if (currentKey != key){
-                        currentLevel.addTile(x, y, image, currentSection, currentKey)
-                        currentKey=key
-                    }
-                    if (currentKey.endsWith("x")){
-                        x=value
-                    }
-                    else if (currentKey.endsWith("y")){
-                        y=value
-                    }
-                    else {currentKey=key;}
+                    var [key, value] = line.split("=")
+                    currentKey=""
+                    if (key.endsWith("x")) x=value
+                    else if (key.endsWith("y")) y=value
+                    else if (key.endsWith("set"))set=value
+                    else currentKey=key
+                    if(currentKey == key) currentLevel.addTile(x, y, image, currentSection, currentKey, set)
                 }
 
                 splitContents.forEach(line => {
@@ -217,22 +215,27 @@ function Load(){
                         }
                         case "BLOCK ELEMENTS": {
                             addTiles(line, "1")
+                            break
                         }
                         case "SCENERY ELEMENTS": {
                             addTiles(line, "s")
+                            break
                         }
                         case "BONUS ELEMENTS": {
                             addTiles(line, "b")
+                            break
                         }
                         case "NPC ELEMENTS": {
                             addTiles(line, "e")
+                            break
                         }
                         case "CUSTOM TILE ELEMENTS": {
                             addTiles(line, "c")
+                            break
                         }
                         case "CUSTOM SCENERY ELEMENTS": {
                             addTiles(line, "cs")
-
+                            break
                         }
                     }
                 })
@@ -263,4 +266,8 @@ function changeView(type){
         activeElements.push(type)
     }
     currentLevel.display()
+}
+
+function createPropWindow(x, y, image, type, key, set, index){
+    
 }

@@ -87,7 +87,28 @@ canvas{
     padding-top: var(--defaultpadding);
     padding-left: var(--defaultpadding);
 }
-
 input {
     accent-color: rgb(160, 65, 255);
+}
+.window{
+    position: absolute;
+    top: 150px;
+    left: 150px;
+    height: 204px;
+    width: 400px;
+    background-color: rgb(36, 36, 36);
+    box-shadow: black 0px 0px 5px;
+    border-radius: 4px;
+    overflow: hidden;
+}
+.window #titlebar{
+    font-size: 16px;
+    height: 24px;
+    line-height: 24px;
+    background-color: rgb(58, 58, 58);
+    padding-left: var(--defaultpadding);
+    transition: 0.5s;
+}
+.window #titlebar:hover{
+    background-color: rgb(70, 70, 70);
 }
