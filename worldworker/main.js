@@ -138,6 +138,8 @@ canvas.addEventListener("dblclick", function(event){
     currentLevel.openTile()
 })
 
+
+
 //loading levels
 function Load(){
     var input = document.createElement('input')
@@ -170,6 +172,21 @@ function Load(){
                 var y = 0
                 var currentKey = ""
 
+                function addTiles(line, image){
+                    var [key, value] = line.split("=");
+                    if (currentKey != key){
+                        currentLevel.addTile(x, y, image, currentSection, currentKey)
+                        currentKey=key
+                    }
+                    if (currentKey.endsWith("x")){
+                        x=value
+                    }
+                    else if (currentKey.endsWith("y")){
+                        y=value
+                    }
+                    else {currentKey=key;}
+                }
+
                 splitContents.forEach(line => {
                     line = line.replace(/^\uFEFF/, '').replace(/\r/g, '').trim();
                     if (line === "") return; // Skip empty lines & comments
@@ -199,89 +216,23 @@ function Load(){
                             }
                         }
                         case "BLOCK ELEMENTS": {
-                            var [key, value] = line.split("=");
-                            if (currentKey != key){
-                                currentLevel.addTile(x, y, "1", currentSection, key)
-                                currentKey=key
-                            }
-                            if (currentKey.endsWith("x")){
-                                x=value
-                            }
-                            else if (currentKey.endsWith("y")){
-                                 y=value
-                            }
-                            else {currentKey=key;} break
-                            
+                            addTiles(line, "1")
                         }
                         case "SCENERY ELEMENTS": {
-                            var [key, value] = line.split("=");
-                            if (currentKey != key){
-                                currentLevel.addTile(x, y, "s", currentSection, key)
-                                currentKey=key
-                            }
-                            if (currentKey.endsWith("x")){
-                                x=value
-                            }
-                            else if (currentKey.endsWith("y")){
-                                 y=value
-                            }
-                            else {currentKey=key;} break
+                            addTiles(line, "s")
                         }
                         case "BONUS ELEMENTS": {
-                            var [key, value] = line.split("=");
-                            if (currentKey != key){
-                                currentLevel.addTile(x, y, "b", currentSection, key)
-                                currentKey=key
-                            }
-                            if (currentKey.endsWith("x")){
-                                x=value
-                            }
-                            else if (currentKey.endsWith("y")){
-                                 y=value
-                            }
-                            else {currentKey=key;} break
+                            addTiles(line, "b")
                         }
                         case "NPC ELEMENTS": {
-                            var [key, value] = line.split("=");
-                            if (currentKey != key){
-                                currentLevel.addTile(x, y, "e", currentSection, key)
-                                currentKey=key
-                            }
-                            if (currentKey.endsWith("x")){
-                                x=value
-                            }
-                            else if (currentKey.endsWith("y")){
-                                 y=value
-                            }
-                            else {currentKey=key;} break
+                            addTiles(line, "e")
                         }
                         case "CUSTOM TILE ELEMENTS": {
-                            var [key, value] = line.split("=");
-                            if (currentKey != key){
-                                currentLevel.addTile(x, y, "c", currentSection, key)
-                                currentKey=key
-                            }
-                            if (currentKey.endsWith("x")){
-                                x=value
-                            }
-                            else if (currentKey.endsWith("y")){
-                                 y=value
-                            }
-                            else {currentKey=key;} break
+                            addTiles(line, "c")
                         }
                         case "CUSTOM SCENERY ELEMENTS": {
-                            var [key, value] = line.split("=");
-                            if (currentKey != key){
-                                currentLevel.addTile(x, y, "cs", currentSection, key)
-                                currentKey=key
-                            }
-                            if (currentKey.endsWith("x")){
-                                x=value
-                            }
-                            else if (currentKey.endsWith("y")){
-                                y=value
-                            }
-                            else {currentKey=key;} break
+                            addTiles(line, "cs")
+
                         }
                     }
                 })
