@@ -101,7 +101,7 @@ input {
     border-radius: 4px;
     overflow: hidden;
 }
-.window #titlebar{
+.window .titlebar{
     font-size: 16px;
     height: 24px;
     line-height: 24px;
@@ -109,6 +109,6 @@ input {
     padding-left: var(--defaultpadding);
     transition: 0.5s;
 }
-.window #titlebar:hover{
+.window .titlebar:hover{
     background-color: rgb(70, 70, 70);
 }

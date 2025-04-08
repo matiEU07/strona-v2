@@ -87,7 +87,7 @@ function Level(name, name2, name3, time, description, author, mail, site, width,
         })
         currentLevel.display()
     }
-    this.openTile=function(){
+    this.openTile=function(){     
         tileArray.forEach(tile => {
             if(
                 mouseX > tile.x-cmx && 
@@ -270,4 +270,10 @@ function changeView(type){
 
 function createPropWindow(x, y, image, type, key, set, index){
     
+}
+function moveWindow(id){
+    window = document.getElementById(id)
+    titleBar = document.getElementById(id+'h')
+
+
 }
