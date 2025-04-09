@@ -119,11 +119,12 @@ onwheel = (event) => {
 
 addEventListener('keydown', (event) => {
     const key = event.key; // "ArrowRight", "ArrowLeft", "ArrowUp", or "ArrowDown"
+    if (event.shiftKey) var shift=4; else shift=1
     switch (event.key) {
-        case "ArrowLeft"  : cmx-=8; break;
-        case "ArrowRight" : cmx+=8; break;
-        case "ArrowUp"    : cmy-=8; break;
-        case "ArrowDown"  : cmy+=8; break;
+        case "ArrowLeft"  : cmx-=8*shift; break;
+        case "ArrowRight" : cmx+=8*shift; break;
+        case "ArrowUp"    : cmy-=8*shift; break;
+        case "ArrowDown"  : cmy+=8*shift; break;
     }
     currentLevel.display()
 });
