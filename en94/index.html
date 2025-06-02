@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="../style/style.css">
+    <link rel="stylesheet" href="https://raw.githubusercontent.com/matiEU07/strona-v2/main/style/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Urbanist:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">    
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>matiEP09</title>
+    <style>
+        body{
+            background-image: url(en94/bgSeamless.jpg);
+            background-repeat: repeat;
+        }
+        nav{
+            backdrop-filter: blur(2px);
+            box-shadow: 0px 0px 5px rgb(0, 0, 0);
+        }
+        .hero{
+            display: flex;
+            float: left;
+            width: 100%;
+            height: 412px;
+        }
+        #en94-hero{
+            background-image: url(en94/en94render.png);
+            height: calc(1080px / 2);
+            width: 50%;
+            background-size: contain;
+            background-repeat: no-repeat;
+            height: 100%;
+        }
+        #en94-hero:hover{
+            background-image: url(en94/en94renderON.png);
+        }
+        #hero-desc{width: 50%;}
+    </style>
+<body>
+
+    <nav>
+        <a href="index.html"><button>start</button></a>
+        <a href="trainz.html"><button>trainz</button></a>
+        <button>tutorials</button>
+        <a href='https://eszut.ep09.net'><button>eszut</button></a>
+        <a href="sim.html"><button>ShortLinesSim</button></a>
+    </nav>
+
+    <nav class="langSelect">
+        <img src="localised/pl.png" id="countryFlag">
+    </nav>
+
+    <main>
+    <div class="hero">
+        <div id="en94-hero"></div>
+        <div id="hero-desc">
+        <h1>EN94</h1>
+        <p>now on home computers!</p>
+        <p>this page is for devlogging the changes i make<br> to the 3d model of my en94.</p>
+        </div>    
+    </div>
+    </main>
+    <footer>
+        ©matiEP09
+    </footer>
+</div>
+<!--i completely forgot how to write html and that shows.-->
+
+</body>
+</html>
