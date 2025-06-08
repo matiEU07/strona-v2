@@ -1,5 +1,6 @@
 //world worker v0
 //setup the actual canvas of the software
+var body = document.getElementById('body')
 var canvas = document.querySelector('canvas')
 var stats = document.getElementById('stats')
 addEventListener("resize", (event) => {});  //refresh on resize
