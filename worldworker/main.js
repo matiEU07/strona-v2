@@ -21,6 +21,17 @@ var cursor = new Image()
 var mouseX = 0
 var mouseY = 0
 
+//generate random id's and stuff
+function makeid(length) {
+    var result           = '';
+    var characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    var charactersLength = characters.length;
+    for ( var i = 0; i < length; i++ ) {
+        result += characters.charAt(Math.floor(Math.random() * charactersLength));
+    }
+    return result;
+}
+
 //create tile class
 function Tile(x, y, image, type, key, set){
     var tile = new Image()
@@ -96,7 +107,7 @@ function Level(name, name2, name3, time, description, author, mail, site, width,
                 mouseY > tile.y-cmy && 
                 mouseY < tile.y-cmy + 32
             ){
-            alert(tile.name)
+                createPropWindow(tile)
             }
         })
         this.display();
@@ -270,12 +281,55 @@ function changeView(type){
     currentLevel.display()
 }
 
-function createPropWindow(x, y, image, type, key, set, index){
+function createPropWindow(tile){
+    propWindow = document.createElement('div')
+    propWindowTitlebar = document.createElement('div')
+
+    id = makeid(64)
+
+    propWindow.setAttribute("id", id)
+    propWindowTitlebar.setAttribute("id", id+'h')
+
+    propWindow.setAttribute("class", "window")
+    propWindowTitlebar.setAttribute("class", "titlebar")
+    propWindowTitlebar.textContent=tile.name
+    // propWindow.textContent = tile.type
     
+    propWindow.append(propWindowTitlebar)
+    body.append(propWindow)
 }
-function moveWindow(id){
-    window = document.getElementById(id)
-    titleBar = document.getElementById(id+'h')
+// function moveWindow(id){
+//     window = document.getElementById(id)
+//     titleBar = document.getElementById(id+'h')
+//     console.log("<meow>")
+//     console.log(id)
+//     console.log("</meow>")
+//     document.onmousemove = meow();
+// }
+// function meow(){
+//     console.log("meow")
+// }
 
+let dragTarget = null;
+let offsetX = 0;
+let offsetY = 0;
 
-}
+document.addEventListener('mousedown', function(e) {
+    if (e.target.classList.contains('titlebar')) {
+        dragTarget = e.target.parentElement;
+        offsetX = e.clientX - dragTarget.offsetLeft;
+        offsetY = e.clientY - dragTarget.offsetTop;
+        document.body.style.userSelect = 'none';
+    }
+});
+
+document.addEventListener('mousemove', function(e) {
+    if (!dragTarget) return;
+    dragTarget.style.left = (e.clientX - offsetX) + 'px';
+    dragTarget.style.top = (e.clientY - offsetY) + 'px';
+});
+
+document.addEventListener('mouseup', function() {
+    dragTarget = null;
+    document.body.style.userSelect = '';
+});

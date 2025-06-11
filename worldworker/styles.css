@@ -2,6 +2,10 @@
     --defaultpadding: 8px;
 }
 
+body{
+    overflow: hidden;
+}
+
 @font-face {
     font-family: sfProDisplay;
     font-weight: medium;
@@ -31,7 +35,7 @@ html, body{
 
 }
 nav{
-    background-color: rgb(58, 58, 58);
+    background-color: rgba(58, 58, 58, 0.668);
     padding: 0px;
     color: rgb(174, 174, 174);
     position: absolute;
@@ -40,6 +44,10 @@ nav{
     height: 32px;
     line-height: 32px;
     padding-left: var(--defaultpadding);
+    border: transparent 1px solid;
+    border-bottom-color: rgba(0, 0, 0, 0.214);
+
+
 }
 #stats{
     position: absolute;
@@ -105,8 +113,11 @@ input {
     left: 150px;
     height: 204px;
     width: 400px;
-    background-color: rgb(36, 36, 36);
-    box-shadow: black 0px 0px 5px;
+    background-color: rgba(36, 36, 36, 0.865);
+    backdrop-filter: blur(10px);
+    box-shadow: rgba(0, 0, 0, 0.344) 0px 0px 10px;
+    border: rgba(255, 255, 255, 0.081) 1px solid;
+    border-top-color: rgba(255, 255, 255, 0.214);
     border-radius: 4px;
     overflow: hidden;
 }
