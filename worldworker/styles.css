@@ -46,6 +46,8 @@ nav{
     padding-left: var(--defaultpadding);
     border: transparent 1px solid;
     border-bottom-color: rgba(0, 0, 0, 0.214);
+    box-shadow: rgba(0, 0, 0, 0.344) 0px 0px 10px;
+    backdrop-filter: blur(10px);
 
 
 }
@@ -102,11 +104,9 @@ canvas{
 input {
     accent-color: rgb(160, 65, 255);
 }
-
 .windowID{
     display: none;
 }
-
 .window{
     position: absolute;
     top: 150px;
@@ -119,17 +119,39 @@ input {
     border: rgba(255, 255, 255, 0.081) 1px solid;
     border-top-color: rgba(255, 255, 255, 0.214);
     border-radius: 4px;
-    overflow: hidden;
+    overflow: hidden;   
 }
 .window .titlebar{
     font-size: 16px;
     height: 24px;
     line-height: 24px;
-    background-color: rgb(58, 58, 58);
+    background-color: rgba(58, 58, 58, 0.75);
     padding-left: var(--defaultpadding);
     transition: 0.5s;
+    -webkit-user-select: none; /* Safari */
+    -ms-user-select: none; /* IE 10 and IE 11 */
+    user-select: none; /* Standard syntax */
 }
 .window .titlebar:hover{
-    background-color: rgb(70, 70, 70);
+    background-color: rgba(70, 70, 70, 0.75);
 }
-
+.closeButton{
+    height: 15px;
+    width: 15px;
+    margin-top: 3px;
+    margin-right: 3px;
+    border-radius: 4px;
+    float: right;
+    border: rgba(255, 255, 255, 0.194) 1px solid;
+    border-top-color: rgba(255, 255, 255, 0.32);
+    outline: 1px #252525 solid;
+    background-image: url(styles/x.png);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 8px;
+}
+.closeButton:active{
+    background-color: rgba(0, 0, 0, 0.169);
+    border: rgba(255, 255, 255, 0.194) 1px solid;
+    border-bottom-color: rgba(255, 255, 255, 0.32);
+}

@@ -125,8 +125,10 @@ currentLevel.display()
 };
 
 onwheel = (event) => {
+    if (event.deltaY){
     cmx = cmx+(16 * (event.deltaY / Math.abs(event.deltaY)))
     currentLevel.display()
+    }
 };
 
 addEventListener('keydown', (event) => {
@@ -284,6 +286,7 @@ function changeView(type){
 function createPropWindow(tile){
     propWindow = document.createElement('div')
     propWindowTitlebar = document.createElement('div')
+    propWindowCloseButton = document.createElement('div')
 
     id = makeid(64)
 
@@ -293,8 +296,10 @@ function createPropWindow(tile){
     propWindow.setAttribute("class", "window")
     propWindowTitlebar.setAttribute("class", "titlebar")
     propWindowTitlebar.textContent=tile.name
+    propWindowCloseButton.setAttribute("class", "closeButton")
+    propWindowCloseButton.setAttribute("onclick", "this.parentNode.parentNode.remove()")
     // propWindow.textContent = tile.type
-    
+    propWindowTitlebar.append(propWindowCloseButton)
     propWindow.append(propWindowTitlebar)
     body.append(propWindow)
 }
