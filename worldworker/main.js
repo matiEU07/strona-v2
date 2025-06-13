@@ -1,5 +1,10 @@
 //world worker v0
+function sleep (time) {
+  return new Promise((resolve) => setTimeout(resolve, time));
+}
 //setup the actual canvas of the software
+
+
 var body = document.getElementById('body')
 var canvas = document.querySelector('canvas')
 var stats = document.getElementById('stats')
@@ -107,7 +112,7 @@ function Level(name, name2, name3, time, description, author, mail, site, width,
                 mouseY > tile.y-cmy && 
                 mouseY < tile.y-cmy + 32
             ){
-                createPropWindow(tile)
+                createpWindow(tile)
             }
         })
         this.display();
@@ -126,7 +131,8 @@ currentLevel.display()
 
 onwheel = (event) => {
     if (event.deltaY){
-    cmx = cmx+(16 * (event.deltaY / Math.abs(event.deltaY)))
+    // cmx = cmx+(16 * (event.deltaY / Math.abs(event.deltaY)))
+    cmx = cmx+ event.deltaY
     currentLevel.display()
     }
 };
@@ -283,25 +289,50 @@ function changeView(type){
     currentLevel.display()
 }
 
-function createPropWindow(tile){
-    propWindow = document.createElement('div')
-    propWindowTitlebar = document.createElement('div')
-    propWindowCloseButton = document.createElement('div')
-
+function createpWindow(tile){
+    pWindow = document.createElement('div')
+    pWindowTitlebar = document.createElement('div')
+    pWindowCloseButton = document.createElement('div')
+    pWindowButtonAssign = document.createElement('button')
+    pWindowButtonOk = document.createElement('button')
+    pWindowButtonCancel = document.createElement('button')
+    pWindowBottomButtons = document.createElement('div')
     id = makeid(64)
 
-    propWindow.setAttribute("id", id)
-    propWindowTitlebar.setAttribute("id", id+'h')
+    pWindow.setAttribute("id", id)
+    pWindowTitlebar.setAttribute("id", id+'h')
 
-    propWindow.setAttribute("class", "window")
-    propWindowTitlebar.setAttribute("class", "titlebar")
-    propWindowTitlebar.textContent=tile.name
-    propWindowCloseButton.setAttribute("class", "closeButton")
-    propWindowCloseButton.setAttribute("onclick", "this.parentNode.parentNode.remove()")
-    // propWindow.textContent = tile.type
-    propWindowTitlebar.append(propWindowCloseButton)
-    propWindow.append(propWindowTitlebar)
-    body.append(propWindow)
+    pWindow.setAttribute("class", "window")
+
+    pWindowTitlebar.setAttribute("class", "titlebar")
+    pWindowTitlebar.textContent=tile.name
+    
+
+    pWindowButtonCancel.setAttribute("class", "button")
+    pWindowButtonCancel.setAttribute("onclick", "this.parentNode.parentNode.remove()")
+    pWindowButtonCancel.textContent="Cancel"
+
+    pWindowButtonAssign.setAttribute("class", "button")
+    pWindowButtonAssign.setAttribute("onclick", "this.parentNode.parentNode.remove()")
+    pWindowButtonAssign.textContent="Apply"
+
+    pWindowButtonOk.setAttribute("class", "button")
+    pWindowButtonOk.setAttribute("onclick", "this.parentNode.parentNode.remove()")
+    pWindowButtonOk.textContent="Ok"
+
+    pWindowCloseButton.setAttribute("class", "closeButton")
+    pWindowCloseButton.setAttribute("onclick", "this.parentNode.parentNode.remove()")
+    
+    pWindowBottomButtons.setAttribute("class", "bottomButtons")
+    pWindowBottomButtons.append(pWindowButtonOk)
+    pWindowBottomButtons.append(pWindowButtonCancel)
+    pWindowBottomButtons.append(pWindowButtonAssign)
+
+    // pWindow.textContent = tile.type
+    pWindowTitlebar.append(pWindowCloseButton)
+    pWindow.append(pWindowTitlebar)
+    pWindow.append(pWindowBottomButtons)
+    body.append(pWindow)
 }
 // function moveWindow(id){
 //     window = document.getElementById(id)
@@ -338,3 +369,22 @@ document.addEventListener('mouseup', function() {
     dragTarget = null;
     document.body.style.userSelect = '';
 });
+
+
+function dropDownToggle(id) {
+  sleep(1).then(() => {
+  document.getElementById(id).classList.toggle("show");
+});
+}
+
+// Close the dropdown menu if the user clicks outside of it
+window.onclick = function(event) {
+    var dropdowns = document.getElementsByClassName("dropdown-content");
+    var i;
+    for (i = 0; i < dropdowns.length; i++) {
+      var openDropdown = dropdowns[i];
+      if (openDropdown.classList.contains('show')) {
+        openDropdown.classList.remove('show');
+      }
+  }
+}

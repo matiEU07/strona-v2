@@ -62,6 +62,9 @@ button{
     font-size: 16px;
     font-family: sfProDisplay,system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
+nav .button{
+    position: relative;
+}
 button:hover{
    color: white; 
 }
@@ -104,8 +107,22 @@ canvas{
 input {
     accent-color: rgb(160, 65, 255);
 }
-.windowID{
-    display: none;
+
+/*============*/
+/*WINDOW STUFF*/
+/*============*/
+
+@keyframes showWindow {
+  from {opacity: 0; scale: 80%;}
+  to {opacity: 1; scale: 100%;}
+}
+@keyframes hideWindow {
+      from {opacity: 1; scale: 100%;}
+  to {opacity: 0; scale: 80%;}
+}
+.hideWindow{
+    animation-name: hideWindow;
+    animation-duration: 0.1s;
 }
 .window{
     position: absolute;
@@ -120,6 +137,9 @@ input {
     border-top-color: rgba(255, 255, 255, 0.214);
     border-radius: 4px;
     overflow: hidden;   
+
+    animation-name: showWindow;
+    animation-duration: 0.1s;
 }
 .window .titlebar{
     font-size: 16px;
@@ -135,7 +155,7 @@ input {
 .window .titlebar:hover{
     background-color: rgba(70, 70, 70, 0.75);
 }
-.closeButton{
+.window .closeButton{
     height: 15px;
     width: 15px;
     margin-top: 3px;
@@ -150,8 +170,69 @@ input {
     background-position: center;
     background-size: 8px;
 }
-.closeButton:active{
+.window .closeButton:active{
     background-color: rgba(0, 0, 0, 0.169);
     border: rgba(255, 255, 255, 0.194) 1px solid;
     border-bottom-color: rgba(255, 255, 255, 0.32);
 }
+
+.window .button{
+    background-color: rgba(255, 255, 255, 0.1);
+    padding: 4px;
+    padding-left: 6px;
+    padding-right: 6px;
+    border-radius: 4px;
+    margin-right: 6px;
+    float: right;
+    border: rgba(255, 255, 255, 0.081) 1px solid;
+    outline: rgba(0, 0, 0, 0.48) 1px solid;
+    border-top-color: rgba(255, 255, 255, 0.214);
+    /* box-shadow: rgba(0, 0, 0, 0.344) 0px 0px 10px; */
+    transition: 0.01s;
+    position: relative;
+}
+.window .button:hover{
+    background-color: rgba(255, 255, 255, 0.2);
+}
+.window .button:active{
+    background-color: rgba(255, 255, 255, 0);
+    transition: 0s;
+    border: rgba(255, 255, 255, 0.081) 1px solid;
+    border-bottom-color: rgba(255, 255, 255, 0.214);
+}
+
+.window .bottomButtons{
+    position: absolute;
+    /* bottom: 36px; */
+    bottom: 18px;
+    height: 18px;
+    width: 100%;
+}
+
+
+/*============*/
+/*DROPDOWNS   */
+/*============*/
+
+.dropdown-content {
+  top: 38px;
+  /* display: none; */
+  position: absolute;
+  background-color: rgba(58, 58, 58, 0.668);
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+  border: transparent 1px solid;
+  box-shadow: rgba(0, 0, 0, 0.344) 0px 0px 10px;
+  border: rgba(255, 255, 255, 0.081) 1px solid;
+  border-top-color: rgba(255, 255, 255, 0.214);
+  backdrop-filter: blur(10px);
+  padding: 4px;
+  border-radius: 4px;
+  opacity: 0;
+  transition: 0.1s;
+  transform: scale(80%);
+  z-index: 0;
+}
+
+.show {opacity: 1; transition: 0s; transform: scale(100%); z-index: 999;}

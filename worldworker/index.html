@@ -7,7 +7,35 @@
     <link rel="stylesheet" href="styles.css" />
 </head>
 <body id="body">
-    <nav>WORLD WORKER <button onclick="Load()">open</button><button onclick="">edit</button><button onclick="">view</button> <span id="stats">no level is currently open.</span>   </nav>
+    <nav>
+        WORLD WORKER
+        <button onclick="dropDownToggle('FileDropDown')" class="navButton">file</button>
+
+        <button onclick="dropDownToggle('EditDropDown')" class="navButton" >edit</button>
+
+        <button onclick="dropDownToggle('ViewDropDown')" class="navButton">view</button>
+
+        <span id="stats">no level is currently open.</span>
+    </nav>
+
+        <div id="FileDropDown" class="dropdown-content" style="margin-left: 128px; ">
+            <button onclick="Load()">Open</button><br>
+            <button onclick="">Save</button><br>
+            <button onclick="">Export</button><br>
+        </div>
+
+<div id="EditDropDown" class="dropdown-content" style="margin-left: 166px; ">
+            <button onclick="">Undo</button><br>
+            <button onclick="">Redo</button><br>
+            <button onclick="">Replace</button><br>
+            <button onclick="">Preferences</button><br>
+        </div>
+<div id="ViewDropDown" class="dropdown-content" style="margin-left: 206px; ">
+            <button onclick="">Smooth scrolling</button><br>
+            <button onclick="">High Contrast</button><br>
+        </div>
+
+
     <canvas></canvas>
     <div class="toolbox">
         <div id="title">toolbox</div>
