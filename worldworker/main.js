@@ -342,7 +342,7 @@ function Preferences(){
     pWindowButtonAssign = document.createElement('button')
     pWindowBottomButtons = document.createElement('div')
 
-    pWindowLabel1 = document.createElement('label')
+    pWindowLabel1 = document.createElement('div')
     pWindowLabel1.setAttribute('class', 'preferencesLabel')
     pWindowLabel1.textContent = "Movement Type:"
 

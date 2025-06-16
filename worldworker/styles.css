@@ -210,8 +210,8 @@ input {
 }
 
 .preferencesLabel{
-    padding: 6px
-
+    padding: var(--defaultpadding)
+    
 }
 
 
