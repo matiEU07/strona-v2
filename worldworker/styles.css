@@ -209,6 +209,11 @@ input {
     width: 100%;
 }
 
+.preferencesLabel{
+    padding: 6px
+
+}
+
 
 /*============*/
 /*DROPDOWNS   */

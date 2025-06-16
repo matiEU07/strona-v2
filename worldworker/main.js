@@ -334,6 +334,46 @@ function createpWindow(tile){
     pWindow.append(pWindowBottomButtons)
     body.append(pWindow)
 }
+
+function Preferences(){
+    pWindow = document.createElement('div')
+    pWindowTitlebar = document.createElement('div')
+    pWindowCloseButton = document.createElement('div')
+    pWindowButtonAssign = document.createElement('button')
+    pWindowBottomButtons = document.createElement('div')
+
+    pWindowLabel1 = document.createElement('label')
+    pWindowLabel1.setAttribute('class', 'preferencesLabel')
+    pWindowLabel1.textContent = "Movement Type:"
+
+    id = makeid(64)
+
+    pWindow.setAttribute("id", id)
+    pWindowTitlebar.setAttribute("id", id+'h')
+
+    pWindow.setAttribute("class", "window")
+
+    pWindowTitlebar.setAttribute("class", "titlebar")
+    pWindowTitlebar.textContent="Preferences"
+
+    pWindowButtonAssign.setAttribute("class", "button")
+    pWindowButtonAssign.setAttribute("onclick", "this.parentNode.parentNode.remove()")
+    pWindowButtonAssign.textContent="Apply"
+
+    pWindowCloseButton.setAttribute("class", "closeButton")
+    pWindowCloseButton.setAttribute("onclick", "this.parentNode.parentNode.remove()")
+    
+    pWindowBottomButtons.setAttribute("class", "bottomButtons")
+
+    pWindowBottomButtons.append(pWindowButtonAssign)
+
+    // pWindow.textContent = tile.type
+    pWindowTitlebar.append(pWindowCloseButton)
+    pWindow.append(pWindowTitlebar)
+    pWindow.append(pWindowBottomButtons)
+    pWindow.append(pWindowLabel1)
+    body.append(pWindow)
+}
 // function moveWindow(id){
 //     window = document.getElementById(id)
 //     titleBar = document.getElementById(id+'h')
