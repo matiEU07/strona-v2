@@ -122,6 +122,11 @@ function Level(name, name2, name3, time, description, author, mail, site, width,
 var currentLevel = new Level("","","","","","","","","","")
 var cmx = 0 //camera x
 var cmy = 0 //camera y
+var scrolltype = "snap"
+if (getCookie("scrolltype")!=""){
+    scrolltype = getCookie("scrolltype")
+}
+
 
 onresize = (event) => {
 canvas.width = window.innerWidth
@@ -129,10 +134,24 @@ canvas.height = window.innerHeight
 currentLevel.display()
 };
 
+function setMovementType(type){
+    scrolltype = type
+    document.cookie = "scrolltype="+type;
+    if (type == "snap"){
+        cmx = Math.round(cmx/16)*16
+        cmy = Math.round(cmy/16)*16
+        currentLevel.display()
+    }
+}
+
 onwheel = (event) => {
     if (event.deltaY){
-    // cmx = cmx+(16 * (event.deltaY / Math.abs(event.deltaY)))
-    cmx = cmx+ event.deltaY
+    if (scrolltype=="snap"){
+        cmx = cmx+(16 * (event.deltaY / Math.abs(event.deltaY)))
+    }
+    else{
+        cmx = cmx+ event.deltaY
+    }
     currentLevel.display()
     }
 };
@@ -342,9 +361,8 @@ function Preferences(){
     pWindowButtonAssign = document.createElement('button')
     pWindowBottomButtons = document.createElement('div')
 
-    pWindowLabel1 = document.createElement('div')
-    pWindowLabel1.setAttribute('class', 'preferencesLabel')
-    pWindowLabel1.textContent = "Movement Type:"
+
+
 
     id = makeid(64)
 
@@ -370,8 +388,37 @@ function Preferences(){
     // pWindow.textContent = tile.type
     pWindowTitlebar.append(pWindowCloseButton)
     pWindow.append(pWindowTitlebar)
-    pWindow.append(pWindowBottomButtons)
+
+    pWindowLabel1 = document.createElement('div')
+    pWindowLabel1.setAttribute('class', 'preferencesLabel')
+    pWindowLabel1.textContent = "Movement Type:"
     pWindow.append(pWindowLabel1)
+
+    radiobutton = document.createElement('input')
+    radiobutton.setAttribute("type","radio")
+    radiobutton.setAttribute("name","scrolltype")
+    radiobutton.setAttribute("onclick", "setMovementType('smooth')")
+
+    radiobuttonLabel = document.createElement('label')
+    radiobuttonLabel.setAttribute("class", "radioContainer")
+    radiobuttonLabel.textContent="smooth"
+    
+    radiobuttonLabel.append(radiobutton)
+    pWindow.append(radiobuttonLabel)
+
+    radiobutton = document.createElement('input')
+    radiobutton.setAttribute("type","radio")
+    radiobutton.setAttribute("name","scrolltype")
+    radiobutton.setAttribute("onclick", "setMovementType('snap')")
+
+    radiobuttonLabel = document.createElement('label')
+    radiobuttonLabel.setAttribute("class", "radioContainer")
+    radiobuttonLabel.textContent="snap"
+
+    radiobuttonLabel.append(radiobutton)
+    pWindow.append(radiobuttonLabel)
+
+    pWindow.append(pWindowBottomButtons)
     body.append(pWindow)
 }
 // function moveWindow(id){
@@ -427,4 +474,31 @@ window.onclick = function(event) {
         openDropdown.classList.remove('show');
       }
   }
+}
+
+
+
+
+
+
+
+
+
+
+// get cookies
+
+function getCookie(cname) {
+  let name = cname + "=";
+  let decodedCookie = decodeURIComponent(document.cookie);
+  let ca = decodedCookie.split(';');
+  for(let i = 0; i <ca.length; i++) {
+    let c = ca[i];
+    while (c.charAt(0) == ' ') {
+      c = c.substring(1);
+    }
+    if (c.indexOf(name) == 0) {
+      return c.substring(name.length, c.length);
+    }
+  }
+  return "";
 }
