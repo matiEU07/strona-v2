@@ -85,7 +85,12 @@ function Level(name, name2, name3, time, description, author, mail, site, width,
         tileArray.pop()
     }
     this.display = function() {
+        console.log(this.height)
+        console.log(cmy)
         if (cmx<0) cmx=0
+        if (cmx>parseFloat(this.width)) cmy=parseFloat(this.width)
+        if (cmy<-64) cmy = -64
+        if (cmy>parseFloat(this.height)) cmy=parseFloat(this.height)
         c.clearRect(0, 0, canvas.width, canvas.height);
         tileArray.forEach((element) => element.draw(cmx,cmy))
         stats.textContent=this.name
@@ -144,16 +149,49 @@ function setMovementType(type){
     }
 }
 
+var scrollinvert=true
 onwheel = (event) => {
+
     if (event.deltaY){
     if (scrolltype=="snap"){
-        cmx = cmx+(16 * (event.deltaY / Math.abs(event.deltaY)))
+        if (scrollinvert){
+            cmy = cmy+(16 * (event.deltaY / Math.abs(event.deltaY)))
+        }
+        else{
+            cmx = cmx+(16 * (event.deltaY / Math.abs(event.deltaY)))
+        }
     }
     else{
-        cmx = cmx+ event.deltaY
+        if (scrollinvert){
+            cmy = cmy+ event.deltaY
+        }
+        else
+        {
+            cmx = cmx+ event.deltaY
+        }
     }
     currentLevel.display()
     }
+    if (event.deltaX){
+    if (scrolltype=="snap"){
+        if (scrollinvert){
+            cmx = cmx+(16 * (event.deltaX / Math.abs(event.deltaX)))
+        }
+        else{
+            cmy = cmy+(16 * (event.deltaX / Math.abs(event.deltaX)))
+        }
+    }
+    else{
+        if (scrollinvert){
+            cmx = cmx+ event.deltaX
+        }
+        else
+        {
+            cmy = cmy+ event.deltaX
+        }
+    }
+    currentLevel.display()
+}
 };
 
 addEventListener('keydown', (event) => {
@@ -421,17 +459,6 @@ function Preferences(){
     pWindow.append(pWindowBottomButtons)
     body.append(pWindow)
 }
-// function moveWindow(id){
-//     window = document.getElementById(id)
-//     titleBar = document.getElementById(id+'h')
-//     console.log("<meow>")
-//     console.log(id)
-//     console.log("</meow>")
-//     document.onmousemove = meow();
-// }
-// function meow(){
-//     console.log("meow")
-// }
 
 let dragTarget = null;
 let offsetX = 0;
