@@ -1,4 +1,6 @@
-//world worker v0
+//world worker v0 by matiEP09
+
+//decoder
 function sleep (time) {
   return new Promise((resolve) => setTimeout(resolve, time));
 }
@@ -38,9 +40,11 @@ function makeid(length) {
 }
 
 //create tile class
-function Tile(x, y, image, type, key, set){
+function Tile(x, y, image, type, key, set, gfx){
     var tile = new Image()
     tile.src = 'tiles/'+image+'.png'
+    this.tileGfx = image
+    this.gfx = gfx
     this.type = type
     this.x = x
     this.y = y
@@ -50,6 +54,7 @@ function Tile(x, y, image, type, key, set){
 
     this.setNewImage = function(image){
         tile.src = 'tiles/'+image+'.png'
+        this.tileGfx = image
     }
 
     this.draw = function(cmx, cmy){
@@ -78,8 +83,8 @@ function Level(name, name2, name3, time, description, author, mail, site, width,
     this.site = site
 
     var tileArray = []
-    this.addTile = function(x, y, image, type, key, set) {
-        tileArray.push(new Tile(x, y, image, type, key, set))
+    this.addTile = function(x, y, image, type, key, set, tile) {
+        tileArray.push(new Tile(x, y, image, type, key, set, tile))
     }
     this.clearTiles = function(){
         tileArray.pop()
@@ -260,8 +265,10 @@ function Load(){
                     if (key.endsWith("x")) x=value
                     else if (key.endsWith("y")) y=value
                     else if (key.endsWith("set"))set=value
-                    else currentKey=key
-                    if(currentKey == key) currentLevel.addTile(x, y, image, currentSection, currentKey, set)
+                    else {currentKey=key; tile = value
+                    if (decoder.indexOf(tile) != -1) {image = decoder.indexOf(tile);}
+                    }
+                    if(currentKey == key) currentLevel.addTile(x, y, image, currentSection, currentKey, set, tile)
                 }
 
                 splitContents.forEach(line => {
@@ -348,48 +355,48 @@ function changeView(type){
 }
 
 function createpWindow(tile){
+
+    function MakeUIElement(type, cssStyle, id, text, action){
+        var element = document.createElement(type)
+        element.setAttribute("class", cssStyle)
+        element.textContent = text
+        element.setAttribute("onclick", action)
+        element.setAttribute("id", id)
+        return element
+    }
+
     pWindow = document.createElement('div')
     pWindowTitlebar = document.createElement('div')
     pWindowCloseButton = document.createElement('div')
-    pWindowButtonAssign = document.createElement('button')
-    pWindowButtonOk = document.createElement('button')
-    pWindowButtonCancel = document.createElement('button')
     pWindowBottomButtons = document.createElement('div')
     id = makeid(64)
 
     pWindow.setAttribute("id", id)
     pWindowTitlebar.setAttribute("id", id+'h')
-
     pWindow.setAttribute("class", "window")
-
     pWindowTitlebar.setAttribute("class", "titlebar")
     pWindowTitlebar.textContent=tile.name
-    
 
-    pWindowButtonCancel.setAttribute("class", "button")
-    pWindowButtonCancel.setAttribute("onclick", "this.parentNode.parentNode.remove()")
-    pWindowButtonCancel.textContent="Cancel"
-
-    pWindowButtonAssign.setAttribute("class", "button")
-    pWindowButtonAssign.setAttribute("onclick", "this.parentNode.parentNode.remove()")
-    pWindowButtonAssign.textContent="Apply"
-
-    pWindowButtonOk.setAttribute("class", "button")
-    pWindowButtonOk.setAttribute("onclick", "this.parentNode.parentNode.remove()")
-    pWindowButtonOk.textContent="Ok"
-
-    pWindowCloseButton.setAttribute("class", "closeButton")
-    pWindowCloseButton.setAttribute("onclick", "this.parentNode.parentNode.remove()")
-    
     pWindowBottomButtons.setAttribute("class", "bottomButtons")
-    pWindowBottomButtons.append(pWindowButtonOk)
-    pWindowBottomButtons.append(pWindowButtonCancel)
-    pWindowBottomButtons.append(pWindowButtonAssign)
-
-    // pWindow.textContent = tile.type
-    pWindowTitlebar.append(pWindowCloseButton)
+    pWindowBottomButtons.append(MakeUIElement("button", "button", "", "Ok", "this.parentNode.parentNode.remove()"))
+    pWindowBottomButtons.append(MakeUIElement("button", "button", "", "Cancel", "this.parentNode.parentNode.remove()"))
+    pWindowBottomButtons.append(MakeUIElement("button", "button", "", "Apply", "this.parentNode.parentNode.remove()"))
+    pWindowTitlebar.append(MakeUIElement("button", "closeButton", "", "", "this.parentNode.parentNode.remove()"))
     pWindow.append(pWindowTitlebar)
     pWindow.append(pWindowBottomButtons)
+
+    var tileDisplay = MakeUIElement("img", "pixel", "tileDisplay", "", "")
+    tileDisplay.src = "tiles/"+tile.tileGfx+".png"
+    pWindow.append(tileDisplay)
+
+    pWindow.append(MakeUIElement("span", "", "", tile.name))
+    pWindow.append(MakeUIElement("span", "", "", tile.type))
+    pWindow.append(MakeUIElement("span", "", "", tile.set))
+    pWindow.append(MakeUIElement("span", "", "", tile.gfx))
+
+    
+
+
     body.append(pWindow)
 }
 

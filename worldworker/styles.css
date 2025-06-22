@@ -148,7 +148,7 @@ input {
     border-top-color: rgba(255, 255, 255, 0.214);
     border-radius: 4px;
     overflow: hidden;   
-
+    
     animation-name: showWindow;
     animation-duration: 0.1s;
 }
@@ -218,6 +218,16 @@ input {
     bottom: 18px;
     height: 18px;
     width: 100%;
+}
+
+.pixel{
+    image-rendering: pixelated;
+}
+
+.window #tileDisplay{
+    padding: 15px;
+    width: 32px;
+    height: 32px;
 }
 
 .preferencesLabel{
