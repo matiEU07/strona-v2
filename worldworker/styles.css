@@ -77,17 +77,28 @@ canvas{
     position: absolute;
     bottom: 0px;
     width: 100%;
-    background-color: rgb(36, 36, 36);
-    box-shadow: black 0px 0px 5px;
+    background-color: rgba(36, 36, 36, 0.865);
+    box-shadow: rgba(0, 0, 0, 0.344) 0px 0px 10px;
+    height: 24px;
+    backdrop-filter: blur(10px);
+    transition: 0.2s;
+}
+.toolbox:hover{
     height: 156px;
 }
 .toolbox #title{
-    background-color: rgb(58, 58, 58);
+    -webkit-user-select: none; /* Safari */
+    -ms-user-select: none; /* IE 10 and IE 11 */
+    user-select: none; /* Standard syntax */
+        /* background-color: rgba(58, 58, 58, 0.25); */
     font-size: 16px;
     padding-left: var(--defaultpadding);
     height: 24px;
     line-height: 24px;
     transition: 0.5s;
+
+    border-bottom: rgba(255, 255, 255, 0.081) 1px solid;
+    border-top: rgba(255, 255, 255, 0.214) 1px solid;
 }
 .toolbox #title:hover{
     background-color: rgb(70, 70, 70);
@@ -98,7 +109,7 @@ canvas{
     height: calc(100% - 24px);
 }
 .toolbox .left{
-    border-right: rgb(70, 70, 70) 1px solid;
+    border-right: rgba(255, 255, 255, 0.05) 1px solid;
     width: calc(256px - var(--defaultpadding));
     height: calc(100% - var(--defaultpadding));
     padding-top: var(--defaultpadding);

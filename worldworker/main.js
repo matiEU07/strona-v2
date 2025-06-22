@@ -66,8 +66,8 @@ function Tile(x, y, image, type, key, set){
 //create level class
 function Level(name, name2, name3, time, description, author, mail, site, width, height){
 
-    this.width = width
-    this.height = height
+    this.width = parseFloat(width)
+    this.height = parseFloat(height)
 
     this.name = name+" "+name2+" "+name3
 
@@ -85,12 +85,13 @@ function Level(name, name2, name3, time, description, author, mail, site, width,
         tileArray.pop()
     }
     this.display = function() {
-        console.log(this.height)
-        console.log(cmy)
+        console.log(cmx)
+
         if (cmx<0) cmx=0
-        if (cmx>parseFloat(this.width)) cmy=parseFloat(this.width)
-        if (cmy<-64) cmy = -64
-        if (cmy>parseFloat(this.height)) cmy=parseFloat(this.height)
+        if (cmx>this.width) cmy=this.width
+        // if (cmy<-this.height) cmy = -parseFloat(this.height)
+        // if (cmy>parseFloat(this.height)) cmy=parseFloat(this.height)
+        cmy = (-canvas.height/2)+(this.height*0.5)
         c.clearRect(0, 0, canvas.width, canvas.height);
         tileArray.forEach((element) => element.draw(cmx,cmy))
         stats.textContent=this.name
