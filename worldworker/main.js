@@ -10,6 +10,7 @@ function sleep (time) {
 var body = document.getElementById('body')
 var canvas = document.querySelector('canvas')
 var stats = document.getElementById('stats')
+var mouseStats = document.getElementById('mouseStats')
 addEventListener("resize", (event) => {});  //refresh on resize
 addEventListener("wheel", (event) => {});   //move around with mouse wheel
 addEventListener("dblclick", (event) => {}); //double click
@@ -216,6 +217,7 @@ canvas.addEventListener("mousemove", function (event) {
     let rect = canvas.getBoundingClientRect()
     mouseX = event.clientX - rect.left
     mouseY = event.clientY - rect.top
+    mouseStats.innerText="mouse x: "+parseInt(mouseX+cmx)+" mouse y: "+parseInt(mouseY+cmy)
     })
 canvas.addEventListener("click", function(event){
     currentLevel.getTile()
@@ -393,6 +395,8 @@ function createpWindow(tile){
     pWindow.append(MakeUIElement("span", "", "", tile.type))
     pWindow.append(MakeUIElement("span", "", "", tile.set))
     pWindow.append(MakeUIElement("span", "", "", tile.gfx))
+    pWindow.append(MakeUIElement("span", "", "", tile.x))
+    pWindow.append(MakeUIElement("span", "", "", tile.y))
 
     
 

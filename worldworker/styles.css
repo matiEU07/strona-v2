@@ -55,6 +55,9 @@ nav{
     position: absolute;
     right: var(--defaultpadding);
 }
+#mouseStats{
+    color: rgba(120, 120, 120, 0.61);
+}
 button{
     background-color: transparent;
     border: none;
@@ -229,7 +232,10 @@ input {
     width: 32px;
     height: 32px;
 }
-
+.window span{
+    display: block;
+    word-wrap: break-word;
+}
 .preferencesLabel{
     padding: var(--defaultpadding)
     
