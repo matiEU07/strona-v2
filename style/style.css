@@ -7,18 +7,30 @@
 
     --defaultPadding: 5px;
 }
+html, body{
+  padding: 0;
+  margin: 0;
+}
+html{
+  height: 100%;
+}
 body{
-    background-color: rgb(17, 17, 17);
     color: var(--maintext);
-    font-family:Urbanist ;
+    font-family:Quicksand, sans-serif;
     margin: 0px;
     font-size: 20px;
+    background: url("../bg.png");
+    backdrop-filter: blur(25px) saturate(200%);
+    min-height: 100%;
+    padding-top: 25px;
+    background-color: rgb(0, 0, 0);
+    background-position: center;
+    background-size: cover;
 }
 
 nav{
-    background-color: rgba(247, 247, 247, 0.066);
+    background-color: rgba(0, 0, 0, 0);
     text-align:center;
-    margin-top: 25px;
     width: fit-content;
     margin-left: auto;
     margin-right: auto;
@@ -29,42 +41,15 @@ nav{
 
     border-width: 1px;
     border-style: solid;
-    border-color: rgba(255, 255, 255, 0.295);
-    border-top-color: rgba(255, 255, 255, 0.461);
-    border-radius: 4px;
-}
-
-.langSelect{
-    position: absolute;
-    top:7.5px;
-    right: 25px;
-    height: 10px;
-    width: 20px;
-    transition: 0.5s;
-}
-.langSelect:hover{
-    /* transform: scale(125%); */
-    transition: 0.1s;
-    background-color: rgba(247, 247, 247, 0.196);
-}
-
-.langSelect:active{
-    transform: scale(80%);
-    background-color: rgba(0, 0, 0, 0.196);
-    transition: 0.025s;
-}
-.langSelect > img{
-    position: absolute;
-    right: 6px;
+    border-color: rgba(255, 255, 255, 0.1);
+    border-top-color: rgba(255, 255, 255, 0.2);
+    border-radius: 8px;
 }
 
 main {
     display: flex;
     flex-direction: column;
     align-items: center;
-}
-.lessimportant{
-    color: var(--secondarytext);
 }
 
 a{
@@ -76,7 +61,7 @@ a:visited{
 }
 
 button{
-    font-family:Urbanist, sans-serif;
+  font-family: "Quicksand", sans-serif;
     background-color: transparent;
     color:var(--maintext);
     border-style: solid;
@@ -85,45 +70,29 @@ button{
     padding-right: var(--defaultPadding);
     margin-left: var(--defaultPadding);
     margin-right: var(--defaultPadding);
-    border-color: var(--maintext);
+    border-color: rgba(255, 255, 255, 0.1);
+    border-top-color: rgba(255, 255, 255, 0.2);
     border-width: 1px;
     border-radius: 4px;
     font-size: 15px;
-    transition: 2s;
+    transition: 0s;
+    font-optical-sizing: auto;
+    font-weight:300;
+    font-style: normal;
 }
 button:hover{
-    background-color: rgba(255, 255, 255, 0.194);
     color:white;
-    border-color: white;
+    border-color: rgb(255, 0, 64);
+    filter: drop-shadow(0px 0px 8px rgb(255, 0, 64)) !important;
     transition: 0.25s;
 }
 button:active{
-    color: #269e6c6f;
-    color:rgb(122, 122, 122);
-    background-color: transparent; 
-    border-color: rgb(122, 122, 122);
-    transform: scale(0.9);
+    color:white;
+    border-color: rgb(255, 255, 255);
+    filter: drop-shadow(0px 0px 8px rgb(255, 255, 255)) !important;
+    transition: 0s;
 }
 
-.urbanist-f {
-    font-family: "Urbanist", sans-serif;
-    font-optical-sizing: auto;
-    font-weight: 100;
-    font-style: normal;
-}
-
-h1{
-    font-size: 65px;
-    margin: 10px;
-}  
-h3{
-    margin: 0px;
-    font-size: 40px;
-}
-.titletext{
-    font-weight: 800;
-    font-size:40px;
-}
 .spacer{
     width: 33%;
     height: 5.3px;
@@ -133,177 +102,11 @@ margin: 0 auto;
 
 }
 
-
-/* MARIO */
-.pixel{
-    image-rendering: pixelated;
-}
-.gamescreen{
-    height: 500px;
-    bottom: 33px;
-    left: 0px;
-    right: 0px;
-    position: absolute;
-}
-.mario{
-    height: 64px;
-    width: 32px;
-    position: absolute;
-}
-.block{
-    height: 32px;
-    width: 32px;
-    position: absolute;
-}
-
-
-
-
-.shadow{
-    filter: drop-shadow(0px 0px 16px rgb(0, 0, 0));
-}
-
-.container{
-    margin: 0 auto;
-    width: max-content;
-}
-
-.buttons{
-    margin: 0 auto;
-    width: max-content;
-}
 .main{width: 40%;}
 .main.wide{width: 75%;}
 .main.full{width: 100%;}
 .no-margin{
     margin: 0px !important;
-}
-.content{
-    background-color: black;
-}
-.container:hover{
-    border-color: rgb(255, 153, 0);
-    transition: 0.2s;
-    filter: drop-shadow(0px 0px 256px rgba(255, 153, 0, 0.251));
-}
-
-
-.container * {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-}
-
-
-
-/*===NEW TRAINZ CONTAINERS*/
-#content.trainz{
-width: 100%;
-}
-.trainzElementBG{
-    width: 100%;
-    height: 200px;
-    background-image: url("https://img.freepik.com/free-vector/dynamic-gradient-grainy-background_23-2148963687.jpg");
-    background-repeat: no-repeat;
-    background-size: cover;
-}
-.trainzElementTitle{
-margin-left: 25%;
-padding-top: 25px;
-font-weight: bolder;
-}
-.trainzElementContent{
-    
-}
-/*===TRAINZ CONTAINER===*/
-
-.container {
-    display: flex;
-    flex-direction: row;
-    width: 800px;
-    height: 200px;
-    padding: 20px;
-    border: 2px solid rgba(255, 255, 255, 0.39);
-    border-radius: 8px;
-    background-color: rgba(255, 255, 255, 0.043);
-    transition: 0.2s;
-
-}
-
-.container-img {
-    width: 200px;
-    height: 200px;
-    border: 2px solid rgb(124, 124, 124);
-    border-radius: 8px;
-    margin-right: 10px;
-}
-
-.custom-right-div {
-    display: flex;
-    flex-direction: column;
-    width: calc(100% - 260px); /* Subtract the width of the left div and margin */
-}
-
-.custom-right-div .container-text {
-    width: 100%;
-    text-align: left;
-    height: 50px;
-    margin-bottom: 10px;
-}
-
-.custom-right-div .container-desc {
-    width: 100%;
-    height: 200px;
-    margin-bottom: 10px;
-    text-align: left;
-    color: rgba(255, 255, 255, 0.397);
-}
-.counter-blank{display: none;}
-.custom-bottom-container {
-    display: flex;
-    align-items: center;
-    text-align: left;
-    color: rgba(255, 255, 255, 0.217) ;
-}
-
-.custom-right-div .custom-bottom-div {
-    flex: 1;
-    height: 30px;
-}
-
-.custom-button {
-    margin-left: 10px;
-    padding: 10px 20px;
-    cursor: pointer;
-    border: 2px solid rgba(255, 255, 255, 0.694);
-}
-
-
-h2{
-    margin-top: 0px;
-}
-.smallcontain{
-    width: 450px;
-margin-left: auto;
-margin-right: auto;
-}
-
-footer{
-    position: fixed;
-    bottom: 0px;
-    left: 0px;
-    right: 0px;
-
-
-    background-color: rgba(247, 247, 247, 0.066);
-    text-align:center;
-    border-color: rgba(255, 255, 255, 0.295);
-    border-top-color: rgba(255, 255, 255, 0.461);
-    border-width: 1px;
-    border-radius: 4px;
-    border-style: solid;
-    padding-top: 4px;
-    padding-bottom: 4px;
 }
 
 
