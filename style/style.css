@@ -47,11 +47,20 @@ nav{
 }
 
 main {
+    h1{
+        font-size: 25px;
+        margin-top: 32px;
+        margin-bottom: -12px;
+        padding-bottom: 0px; 
+    }
+
     display: flex;
     flex-direction: column;
     align-items: center;
 }
-
+    p{
+        width: 35%;
+    }
 a{
     text-decoration: none;
     color: var(--maintext);
