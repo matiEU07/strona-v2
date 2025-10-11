@@ -1,54 +1,35 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <link rel="stylesheet" href="style/style.css">
-    <link rel="stylesheet" href="https://raw.githubusercontent.com/matiEU07/strona-v2/main/style/style.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Urbanist:ital,wght@0,100..900;1,100..900&display=swap"
-        rel="stylesheet">
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>matiEP09</title>
-
+<!-- <link rel="stylesheet" href="https://raw.githubusercontent.com/matiEU07/strona-v2/main/style/style.css"> -->
+<link rel="preload" as="image" href="../bg.png">
+<style>@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap');</style>
+<link rel="stylesheet" href="style/style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>matiEP09</title>
+</head>
 
 <body>
-    <header>
     <nav>
         <a href="index.html"><button>start</button></a>
-        <a href="trainz.html"><button>trainz</button></a>
-        <button>tutorials</button>
+        <a href="trainz.html"><button>models</button></a>
         <a href='https://eszut.ep09.net'><button>eszut</button></a>
         <a href="sim.html"><button>ShortLinesSim</button></a>
     </nav>
-        <nav class="langSelect">
-            <img src="localised/pl.png" id="countryFlag">
-        </nav>
-    </header>
-
-
     <main>
-        <h1>Trainz</h1>
-        <div class="main full">
-
+        <h1>3d models</h1>
+        <div class="dls">
+            
             <div class="buttons"> 
-                <button id="stock" class="no-margin">trains</button>
-                <button id="other">scenery</button>
-                <button id="edit">repaint</button>
+                <button onclick="handleButtons(1)"> trains </button>
+                <button onclick="handleButtons(2)"> stations</button>
+                <button onclick="handleButtons(3)"> scenery</button>
             </div>
             <br><br>
 
-            <div id="content" class="trainz">
-<!--                 <div class="trainzElementBG">
-                <div class="trainzElementTitle">Toyo rapid 1000 series</div> -->
-            </div>
-            </div>
+            <div id="content" class="trainz"></div>
         </div>
-        <!--
-        <marquee scrollamount="120" loop="1" scrolldelay="61"><img src="en57.gif"></marquee>
-        <div class="navbar"><br><br>© matiEP09<br></div>
-        i completely forgot how to write html and that shows.-->
     </main>
 
 
@@ -66,28 +47,15 @@
 <script>
     //===============================================||buttons :3||===============================================\\
     var currentTab = 1;
-    document.getElementById('stock').onclick = function () {
-        currentTab=1;
-        document.getElementById('content').innerHTML = ''
-        displayAssets();
-    }
-    document.getElementById('other').onclick = function () {
-        currentTab=2;
-        document.getElementById('content').innerHTML = ''
-        displayAssets();
-    }
-    document.getElementById('edit').onclick = function () {
-        currentTab=3;
-        document.getElementById('content').innerHTML = ''
-        displayAssets();
-    }
 
-
+    function handleButtons(tab){
+        currentTab=tab
+        document.getElementById('content').innerHTML = ''
+        displayAssets()
+    };
     //===============================================||displaying the thingys||===============================================\\
     function displayAssets(){
     var train = 1
-
-//    while (train<100){
 
         //typ (railcar, etc.)
         //nazwa
@@ -99,11 +67,11 @@
         //tekst na przycisku
 
         if(currentTab==1){
-            createElement("type", "ew58-xxx", "PKP class EW58, made for SKM Trojmiasto in 1974,<br>and decommissioned in 2012. <br> now there is only one set left, the EW58-028.", "trainz2019+", "https://cataas.com/cat?height=200&width:200", "https://mati.ep09.net/stare/old/404.html", "uh oh", "coming soon!")
-            createElement("type", "Tōyō Rapid 1000 series", "There were 12 of ten-car sets that were converted in 1995 from Tokyo Metro 5000 series sets.<br> all of them were retired in 2006.", "trainz2019+", "https://cataas.com/cat?height=200&width:200", "https://mati.ep09.net/stare/old/404.html", "uh oh", "coming soon!")
+            document.getElementById('content').innerHTML += "nothing here... yet";
         }
         if(currentTab==2){
-            createElement("type", "wkd ochota station", "wkd ochota station as it currently is in warsaw.", "trainz2019+", "https://cataas.com/cat?height=200&width:200", "https://mati.ep09.net/stare/old/404.html", "uh oh", "coming soon!")
+            createElement("Platform clock 60s Warsaw", "As seen on Warszawa Śródmieście and Ochota right after being built.", "0.0", "https://cataas.com/cat?height=200&width:200", "https://mati.ep09.net/stare/old/404.html")
+            createElement("Warszawa Ochota Bench", "As seen on Warszawa Ochota right after being built.", "0.0", "https://cataas.com/cat?height=200&width:200", "https://mati.ep09.net/stare/old/404.html")
         }
         if(currentTab==3){
             createElement("type", "Warszawa Ochota Platform", "fast retexture to match the platform at Warszawa Ochota", "trainz2009+", "https://cataas.com/cat?height=200&width:200", "https://mati.ep09.net/stare/old/404.html", "uh oh", "coming never")
@@ -113,7 +81,7 @@
 }
 
     function createElement(content, name, desc, version, imgsrc, downloadlink, filename, buttontext){
-        document.getElementById('content').innerHTML += '<div class="container"><img class="container-img" src="'+imgsrc+'"><div class="custom-right-div"><div class="container-text">'+name+'</div><div class="container-desc">'+desc+'</div><div class="custom-bottom-container"><div class="custom-bottom-div">'+version+'</div><button class="custom-button"><a href="'+downloadlink+'" download="'+filename+'">'+buttontext+'</button></div></div></div><br>';
+        document.getElementById('content').innerHTML += name;
     }
 //    window.onload = kibel;
 </script>
