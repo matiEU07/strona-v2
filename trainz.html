@@ -74,14 +74,23 @@
             createElement("Warszawa Ochota Bench", "As seen on Warszawa Ochota right after being built.", "0.0", "https://cataas.com/cat?height=200&width:200", "https://mati.ep09.net/stare/old/404.html")
         }
         if(currentTab==3){
-            createElement("type", "Warszawa Ochota Platform", "fast retexture to match the platform at Warszawa Ochota", "trainz2009+", "https://cataas.com/cat?height=200&width:200", "https://mati.ep09.net/stare/old/404.html", "uh oh", "coming never")
+            document.getElementById('content').innerHTML += "nothing here... yet";
         }
-    //train++
 //}    
 }
 
-    function createElement(content, name, desc, version, imgsrc, downloadlink, filename, buttontext){
-        document.getElementById('content').innerHTML += name;
-    }
+    function createElement(name, desc, version, imgsrc, downloadlink){
+    document.getElementById('content').innerHTML += `
+    <div class="downloadContainer">
+        <img src="${imgsrc}">
+        <span class="title">${name}</span>
+        <span class="desc">${desc}</span>
+        <span class="ver">${version}</span>
+        <a onclick="window.open('${downloadlink}', 'newwindow', 'width=650,height=650'); return false;">
+            <button>download</button>
+        </a>
+    </div>`
+}
+
 //    window.onload = kibel;
 </script>
