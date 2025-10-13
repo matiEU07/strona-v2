@@ -132,6 +132,21 @@ button:active{
     border-radius: 8px;
     overflow: hidden;
 }
+.downloadContainer{
+    border: 0.5px transparent solid;
+    border-bottom-color: rgba(255,255,255,0.2);
+    border-top-color: rgba(255,255,255,0.2);
+    span{
+        padding: var(--defaultPadding);
+    }
+    img{
+        width: 128px;
+        height: 128px;
+        float:left
+    }
+    clear: both;
+    height: 128px;
+}
 .buttons{
     background-color: rgba(0, 0, 0, 0.646);
     padding-top: 4px;

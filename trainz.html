@@ -70,7 +70,7 @@
             document.getElementById('content').innerHTML += "nothing here... yet";
         }
         if(currentTab==2){
-            createElement("Platform clock 60s Warsaw", "As seen on Warszawa Śródmieście and Ochota right after being built.", "0.0", "https://cataas.com/cat?height=200&width:200", "https://mati.ep09.net/stare/old/404.html")
+            createElement("Platform clock 60s Warsaw", "As seen on Warszawa Śródmieście and Ochota right after being built.", "0.0", "dls/clock.png", "https://mati.ep09.net/stare/old/404.html")
             createElement("Warszawa Ochota Bench", "As seen on Warszawa Ochota right after being built.", "0.0", "https://cataas.com/cat?height=200&width:200", "https://mati.ep09.net/stare/old/404.html")
         }
         if(currentTab==3){
@@ -83,7 +83,7 @@
     document.getElementById('content').innerHTML += `
     <div class="downloadContainer">
         <img src="${imgsrc}">
-        <span class="title">${name}</span>
+        <span class="title">${name}</span><br>
         <span class="desc">${desc}</span>
         <span class="ver">${version}</span>
         <a onclick="window.open('${downloadlink}', 'newwindow', 'width=650,height=650'); return false;">
