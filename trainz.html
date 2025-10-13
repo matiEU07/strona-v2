@@ -70,11 +70,11 @@
             document.getElementById('content').innerHTML += "nothing here... yet";
         }
         if(currentTab==2){
-            createElement("Platform clock 60s Warsaw", "As seen on Warszawa Śródmieście and Ochota right after being built.", "0.0", "dls/clock.png", "https://mati.ep09.net/stare/old/404.html")
-            createElement("Warszawa Ochota Bench", "As seen on Warszawa Ochota right after being built.", "0.0", "https://cataas.com/cat?height=200&width:200", "https://mati.ep09.net/stare/old/404.html")
+            createElement("Platform clock 60s Warsaw", "As seen on Warszawa Śródmieście and Ochota right after being built.", "0.0", "dls/ochotaclock.png", "https://mati.ep09.net/stare/old/404.html")
+            createElement("Warszawa Ochota Bench", "As seen on Warszawa Ochota right after being built.", "0.0", "dls/ochotabench.png", "https://mati.ep09.net/stare/old/404.html")
         }
         if(currentTab==3){
-            document.getElementById('content').innerHTML += "nothing here... yet";
+            createElement("Street light 1", "Seen in warsaw in the 60s.", "0.0", "https://cataas.com/cat?height=200&width:200?x=2", "https://mati.ep09.net/stare/old/404.html")
         }
 //}    
 }
@@ -82,12 +82,12 @@
     function createElement(name, desc, version, imgsrc, downloadlink){
     document.getElementById('content').innerHTML += `
     <div class="downloadContainer">
-        <img src="${imgsrc}">
+        <div class="thumbnail"><img src="${imgsrc}"></div>
         <span class="title">${name}</span><br>
         <span class="desc">${desc}</span>
         <span class="ver">${version}</span>
         <a onclick="window.open('${downloadlink}', 'newwindow', 'width=650,height=650'); return false;">
-            <button>download</button>
+            <button class="download">download</button>
         </a>
     </div>`
 }
