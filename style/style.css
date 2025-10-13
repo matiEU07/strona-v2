@@ -136,9 +136,6 @@ button:active{
 .downloadContainer{
     position: relative;
     border-top: 0.5px rgba(255,255,255,0.2) solid;
-    .title{
-        padding-top: 10px;
-    }
 
     span{
         padding: var(--defaultPadding);
@@ -166,6 +163,8 @@ button:active{
     height: 128px;
     transition: 0.1s;
 }
+
+
 .download{
     position: absolute;
     bottom: 16px;
