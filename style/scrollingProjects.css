@@ -1,0 +1,44 @@
+.scrollingProjectsContainer{
+    background-color: rgba(0, 0, 0, 0);
+    height: 400px;
+    width: 100%;
+    margin-top: 40px;
+    padding: 0px;
+    user-select: none;
+}
+.scrollingProject{
+    position: relative;
+    background-color: rgba(0, 0, 0, 0.391);
+    border-radius: 8px;
+    width: 50%;
+    margin-left: 25%;
+    height: calc(100% - 40px);
+    padding: 0px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+
+    background-position: center;
+    /* background-size: contain; */
+    background-size: 100%;
+
+
+    border-width: 1px;
+    border-style: solid;
+    border-color: rgba(255, 255, 255, 0.1);
+    border-top-color: rgba(255, 255, 255, 0.2);
+    transition: 0.5s;
+
+    h2{
+        margin: 0px;
+        position: absolute;
+        bottom: 20px;
+        left: 20px;
+    }
+}
+.scrollingProject:hover{
+    /* transform: scale(120%); */
+    background-size: 125%;
+}
+#ochota{
+    background-image: url(../projects/ochotaThumb.png);
+}
