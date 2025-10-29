@@ -49,3 +49,7 @@
 #ochota{
     background-image: url(../projects/ochotaThumb.png);
 }
+#forum{
+    background-image: url(../projects/forum.png);
+    filter: brightness(50%);
+}

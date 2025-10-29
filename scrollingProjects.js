@@ -23,5 +23,5 @@ projects.push(
 
 function openProject(projectName) {
     const project = projects.find((element) => element.name === projectName);
-    console.log(project.desc);
-}
+    document.getElementById("windowContainer").innerHTML = project.desc;
+  }
