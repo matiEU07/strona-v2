@@ -23,7 +23,7 @@
     background-position: center;
     /* background-size: contain; */
     background-size: 100%;
-
+    overflow: hidden;
 
     border-width: 1px;
     border-style: solid;
@@ -31,7 +31,7 @@
     border-top-color: rgba(255, 255, 255, 0.2);
     transition: 0.5s;
 
-
+    cursor: pointer;
 }
 .scrollingProject h2{
         margin: 0px;
@@ -42,14 +42,32 @@
         -webkit-user-select: none;
 
 }
+.noPointer{
+    cursor: default;
+}
 .scrollingProject:hover{
     /* transform: scale(120%); */
     background-size: 125%;
 }
+@keyframes showSidebar {
+  from {margin-left: 100%;}
+  to {margin-left: calc(50% - 40px);}
+}
+.sidebarText{
+    background-color: rgba(158, 158, 158, 0.172);
+    color: rgb(193, 193, 193);
+    height: 100%;
+    width: 50%;
+    padding: 20px;
+    animation: showSidebar 0.5s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+    backdrop-filter: blur(10px);
+}
+
+
 #ochota{
     background-image: url(../projects/ochotaThumb.png);
 }
 #forum{
     background-image: url(../projects/forum.png);
-    filter: brightness(50%);
+    /* filter: brightness(50%); */
 }

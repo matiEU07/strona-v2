@@ -11,17 +11,24 @@ var projects = [];
 projects.push(
   new Project(
     "Warszawa Ochota",
-    `A detailed 3D environment of the Warszawa Ochota + Warszawa Ochota WKD station and its surroundings.<br> 
-    The project is almost entirely made in Blender and was divided into small parts, like the benches, platform clocks, and each and every building.<br>
-    For the textures I used public domain assets, as well as Apple Keynote and Photoshop CS6 to make the clock faces or station signs. 
-    The entire environment takes place in the 60s–70s and features Post-Modernist architecture in its prime,<br>
-    though the neons that made it beautiful are still nowhere to be found.`,
+    `A detailed 3D environment of the Warszawa Ochota + Warszawa Ochota WKD station and its surroundings.<br> <br>
+    The project is almost entirely made in Blender and was divided into small parts, like the benches, platform clocks, and each and every building.<br><br>
+    Featuring Modernist architecture with windows that light up the entire enviroment.<br>
+    ...the neons are still work in progress.`,
     "2025–now", 
     []
   )
 );
-
-function openProject(projectName) {
+projects.push(
+  new Project(
+    "Hotel Forum",
+    `A detailed 3D model of the exterior of one of the last and most innovative hotels built in the beautiful late Modernist architecture.`,
+    "2025–now", 
+    []
+  )
+);
+function openProject(projectName, projectID) {
     const project = projects.find((element) => element.name === projectName);
-    document.getElementById("windowContainer").innerHTML = project.desc;
+    document.getElementById(projectID).innerHTML += '<div class="sidebarText">'+project.desc+'</div>';
+    document.getElementById(projectID).classList.add("noPointer")
   }
