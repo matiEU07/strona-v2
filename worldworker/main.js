@@ -90,6 +90,9 @@ function Level(name, name2, name3, time, description, author, mail, site, width,
     this.clearTiles = function(){
         tileArray.pop()
     }
+    this.getTiles = function() {
+    return tileArray.slice(); // return copy, not original
+    }
     this.display = function() {
         console.log(cmx)
 
@@ -128,6 +131,10 @@ function Level(name, name2, name3, time, description, author, mail, site, width,
             }
         })
         this.display();
+    }
+    this.getTileArray=function()
+    {
+        return(tileArray)
     }
 }
 
@@ -515,7 +522,98 @@ window.onclick = function(event) {
   }
 }
 
+function ExportToCSharp()
+{
+    const tileSize = 32;
 
+    const gridWidth = Math.ceil(currentLevel.width / tileSize);
+    const gridHeight = Math.ceil(currentLevel.height / tileSize);
+
+    // create empty grid
+    let grid = [];
+    for (let y = 0; y < gridHeight; y++) {
+        grid[y] = [];
+        for (let x = 0; x < gridWidth; x++) {
+            grid[y][x] = "";
+        }
+    }
+
+    // use getter
+    var tiles = currentLevel.getTiles();
+
+    const gfxToCode = {
+        "Terrain 001": "g1", //ground tiles
+        "Terrain 002": "g2",
+        "Terrain 003": "g3",
+        "Terrain 006": "g6",
+        "Terrain 005": "g5",
+        "Terrain 004": "g4",
+        
+
+        
+        "Pipe 001": "p1", //pipe
+        "Pipe 002": "p2",
+        "Pipe 003": "p3",
+        "Pipe 004": "p4",
+
+        "Block 002": "b",
+        "Block 050": "brdg",
+        "Block 064": "brdg",
+        
+        "Bonus 011": "br", 
+        "Bonus 010": "br", 
+
+        
+        "Bonus 012": "c1", 
+        "Bonus 002": "q1", 
+        "Bonus 004": "q1", 
+        // "Bonus 010": "q1", 
+    
+        "Common 020" : "",
+    };
+
+
+    tiles.forEach(tile => {
+
+        const gx = Math.floor(tile.x / tileSize);
+        const gy = Math.floor(tile.y / tileSize);
+        if (gx >= 0 && gy >= 0 && gx < gridWidth && gy < gridHeight)
+        {
+            let value = "";
+            if (tile.type != "SCENERY ELEMENTS"){
+            value = gfxToCode[tile.gfx] || tile.gfx || "";
+            grid[gy][gx] = value;
+            }
+        }
+
+    });
+
+    let output = "public string[,] _level = new string[,]\n{\n";
+
+    for (let y = 0; y < gridHeight; y++)
+    {
+        output += "    {";
+
+        for (let x = 0; x < gridWidth; x++)
+        {
+            output += `"${grid[y][x]}"`;
+            if (x < gridWidth - 1) output += ",";
+        }
+
+        output += "}";
+        if (y < gridHeight - 1) output += ",";
+        output += "\n";
+    }
+
+    output += "};";
+
+    const blob = new Blob([output], { type: "text/plain" });
+    const link = document.createElement("a");
+
+    link.href = URL.createObjectURL(blob);
+    link.download = "level_export.cs";
+    link.click();
+}
 
 
 
