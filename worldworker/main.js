@@ -373,12 +373,14 @@ function createpWindow(tile){
     pWindow.setAttribute("id", id)
     pWindow.setAttribute("class", "window")
 
+    // --- Position at mouse cursor, clamped to viewport ---
     var winW = 400, winH = 220
     var spawnX = Math.min(mouseX, window.innerWidth - winW - 8)
     var spawnY = Math.max(40, Math.min(mouseY, window.innerHeight - winH - 8))
     pWindow.style.left = spawnX + "px"
     pWindow.style.top  = spawnY + "px"
 
+    // --- Titlebar (must be first child for dragging to work) ---
     pWindowTitlebar.setAttribute("id", id+'h')
     pWindowTitlebar.setAttribute("class", "titlebar")
 
@@ -415,10 +417,12 @@ function createpWindow(tile){
     topRow.append(infoBlock)
     pWindow.append(topRow)
 
+    // --- Separator ---
     var sep = document.createElement('div')
     sep.style.cssText = "border-top: 1px solid rgba(255,255,255,0.07); margin: 4px 0;"
     pWindow.append(sep)
 
+    // --- Tile gfx dropdown row ---
     var editRow = document.createElement('div')
     editRow.style.cssText = "padding: 6px 8px; display:flex; align-items:center; gap:8px;"
 
@@ -430,7 +434,10 @@ function createpWindow(tile){
     var select = document.createElement('select')
     select.style.cssText = "background:rgba(255,255,255,0.08); color:rgb(174,174,174); border:1px solid rgba(255,255,255,0.15); border-radius:4px; padding:2px 4px; font-family:inherit; font-size:13px; flex:1;"
 
-    var decoderOptions = [...new Set(decoder.filter(d => d !== ""))].sort()
+    // Collect all gfx names: decoder entries + every gfx used in the current level
+    var allGfxNames = new Set(decoder.filter(d => d !== ""))
+    currentLevel.getTileArray().forEach(function(t) { if (t.gfx) allGfxNames.add(t.gfx) })
+    var decoderOptions = [...allGfxNames].sort()
     if (tile.gfx && !decoderOptions.includes(tile.gfx)) {
         decoderOptions.unshift(tile.gfx)
     }
@@ -442,11 +449,10 @@ function createpWindow(tile){
         select.append(opt)
     })
 
+    // Live preview on change
     select.addEventListener('change', function() {
         var imgIndex = decoder.indexOf(select.value)
-        if (imgIndex !== -1) {
-            tileDisplay.src = "tiles/" + imgIndex + ".png"
-        }
+        tileDisplay.src = imgIndex !== -1 ? "tiles/" + imgIndex + ".png" : "tiles/" + tile.tileGfx + ".png"
         titleText.textContent = select.value
     })
 
@@ -459,13 +465,14 @@ function createpWindow(tile){
     function applyChanges() {
         var selectedGfx = select.value
         var imgIndex = decoder.indexOf(selectedGfx)
+        // Only update the image if we have a valid decoder mapping for the new name
         if (imgIndex !== -1) {
             tile.setNewImage(imgIndex)
         }
+        // Always update gfx name so export reflects the change
         tile.gfx = selectedGfx
         tile.name = selectedGfx
         currentLevel.display()
-
         titleText.textContent = selectedGfx
     }
 
