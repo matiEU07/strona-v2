@@ -365,48 +365,129 @@ function changeView(type){
 
 function createpWindow(tile){
 
-    function MakeUIElement(type, cssStyle, id, text, action){
-        var element = document.createElement(type)
-        element.setAttribute("class", cssStyle)
-        element.textContent = text
-        element.setAttribute("onclick", action)
-        element.setAttribute("id", id)
-        return element
-    }
-
-    pWindow = document.createElement('div')
-    pWindowTitlebar = document.createElement('div')
-    pWindowCloseButton = document.createElement('div')
-    pWindowBottomButtons = document.createElement('div')
-    id = makeid(64)
+    var pWindow = document.createElement('div')
+    var pWindowTitlebar = document.createElement('div')
+    var pWindowBottomButtons = document.createElement('div')
+    var id = makeid(64)
 
     pWindow.setAttribute("id", id)
-    pWindowTitlebar.setAttribute("id", id+'h')
     pWindow.setAttribute("class", "window")
+
+    var winW = 400, winH = 220
+    var spawnX = Math.min(mouseX, window.innerWidth - winW - 8)
+    var spawnY = Math.max(40, Math.min(mouseY, window.innerHeight - winH - 8))
+    pWindow.style.left = spawnX + "px"
+    pWindow.style.top  = spawnY + "px"
+
+    pWindowTitlebar.setAttribute("id", id+'h')
     pWindowTitlebar.setAttribute("class", "titlebar")
-    pWindowTitlebar.textContent=tile.name
 
-    pWindowBottomButtons.setAttribute("class", "bottomButtons")
-    pWindowBottomButtons.append(MakeUIElement("button", "button", "", "Ok", "this.parentNode.parentNode.remove()"))
-    pWindowBottomButtons.append(MakeUIElement("button", "button", "", "Cancel", "this.parentNode.parentNode.remove()"))
-    pWindowBottomButtons.append(MakeUIElement("button", "button", "", "Apply", "this.parentNode.parentNode.remove()"))
-    pWindowTitlebar.append(MakeUIElement("button", "closeButton", "", "", "this.parentNode.parentNode.remove()"))
+    var titleText = document.createTextNode(tile.name)
+    pWindowTitlebar.append(titleText)
+
+    var closeBtn = document.createElement('button')
+    closeBtn.className = "closeButton"
+    closeBtn.onclick = function() { pWindow.remove() }
+    pWindowTitlebar.append(closeBtn)
     pWindow.append(pWindowTitlebar)
+
+    // --- Tile image preview + info row ---
+    var topRow = document.createElement('div')
+    topRow.style.cssText = "display:flex; align-items:center; padding: 8px 8px 4px 8px; gap:8px;"
+
+    var tileDisplay = document.createElement("img")
+    tileDisplay.className = "pixel"
+    tileDisplay.src = "tiles/" + tile.tileGfx + ".png"
+    tileDisplay.style.cssText = "width:32px; height:32px; image-rendering:pixelated; flex-shrink:0;"
+    topRow.append(tileDisplay)
+
+    var infoBlock = document.createElement('div')
+    infoBlock.style.cssText = "font-size:13px; color:rgba(174,174,174,0.7); line-height:1.5;"
+    var makeRow = function(label, value) {
+        var s = document.createElement('span')
+        s.style.display = "block"
+        s.textContent = label + ": " + value
+        return s
+    }
+    infoBlock.append(makeRow("Type", tile.type))
+    infoBlock.append(makeRow("Set", tile.set))
+    infoBlock.append(makeRow("Position", "x=" + tile.x + "  y=" + tile.y))
+    topRow.append(infoBlock)
+    pWindow.append(topRow)
+
+    var sep = document.createElement('div')
+    sep.style.cssText = "border-top: 1px solid rgba(255,255,255,0.07); margin: 4px 0;"
+    pWindow.append(sep)
+
+    var editRow = document.createElement('div')
+    editRow.style.cssText = "padding: 6px 8px; display:flex; align-items:center; gap:8px;"
+
+    var gfxLabel = document.createElement('span')
+    gfxLabel.textContent = "Tile:"
+    gfxLabel.style.cssText = "font-size:13px; color:rgba(174,174,174,0.9); white-space:nowrap;"
+    editRow.append(gfxLabel)
+
+    var select = document.createElement('select')
+    select.style.cssText = "background:rgba(255,255,255,0.08); color:rgb(174,174,174); border:1px solid rgba(255,255,255,0.15); border-radius:4px; padding:2px 4px; font-family:inherit; font-size:13px; flex:1;"
+
+    var decoderOptions = [...new Set(decoder.filter(d => d !== ""))].sort()
+    if (tile.gfx && !decoderOptions.includes(tile.gfx)) {
+        decoderOptions.unshift(tile.gfx)
+    }
+    decoderOptions.forEach(function(name) {
+        var opt = document.createElement('option')
+        opt.value = name
+        opt.textContent = name
+        if (name === tile.gfx) opt.selected = true
+        select.append(opt)
+    })
+
+    select.addEventListener('change', function() {
+        var imgIndex = decoder.indexOf(select.value)
+        if (imgIndex !== -1) {
+            tileDisplay.src = "tiles/" + imgIndex + ".png"
+        }
+        titleText.textContent = select.value
+    })
+
+    editRow.append(select)
+    pWindow.append(editRow)
+
+    // --- Bottom buttons ---
+    pWindowBottomButtons.setAttribute("class", "bottomButtons")
+
+    function applyChanges() {
+        var selectedGfx = select.value
+        var imgIndex = decoder.indexOf(selectedGfx)
+        if (imgIndex !== -1) {
+            tile.setNewImage(imgIndex)
+        }
+        tile.gfx = selectedGfx
+        tile.name = selectedGfx
+        currentLevel.display()
+
+        titleText.textContent = selectedGfx
+    }
+
+    var cancelBtn = document.createElement('button')
+    cancelBtn.className = "button"
+    cancelBtn.textContent = "Cancel"
+    cancelBtn.onclick = function() { pWindow.remove() }
+
+    var applyBtn = document.createElement('button')
+    applyBtn.className = "button"
+    applyBtn.textContent = "Apply"
+    applyBtn.onclick = applyChanges
+
+    var okBtn = document.createElement('button')
+    okBtn.className = "button"
+    okBtn.textContent = "Ok"
+    okBtn.onclick = function() { applyChanges(); pWindow.remove() }
+
+    pWindowBottomButtons.append(okBtn)
+    pWindowBottomButtons.append(cancelBtn)
+    pWindowBottomButtons.append(applyBtn)
     pWindow.append(pWindowBottomButtons)
-
-    var tileDisplay = MakeUIElement("img", "pixel", "tileDisplay", "", "")
-    tileDisplay.src = "tiles/"+tile.tileGfx+".png"
-    pWindow.append(tileDisplay)
-
-    pWindow.append(MakeUIElement("span", "", "", tile.name))
-    pWindow.append(MakeUIElement("span", "", "", tile.type))
-    pWindow.append(MakeUIElement("span", "", "", tile.set))
-    pWindow.append(MakeUIElement("span", "", "", tile.gfx))
-    pWindow.append(MakeUIElement("span", "", "", tile.x))
-    pWindow.append(MakeUIElement("span", "", "", tile.y))
-
-    
-
 
     body.append(pWindow)
 }
