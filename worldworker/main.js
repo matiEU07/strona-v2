@@ -651,8 +651,6 @@ function ExportToCSharp()
         "Terrain 005": "g5",
         "Terrain 004": "g4",
         
-
-        
         "Pipe 001": "p1", //pipe
         "Pipe 002": "p2",
         "Pipe 003": "p3",
@@ -664,13 +662,13 @@ function ExportToCSharp()
         
         "Bonus 011": "br", 
         "Bonus 010": "br", 
-
         
         "Bonus 012": "c1", 
         "Bonus 002": "q1", 
         "Bonus 004": "q1", 
-        // "Bonus 010": "q1", 
     
+        "Hazard 012": "cannontop",
+
         "Common 020" : "",
 
         "EnemyMark 003" : "CheepCheepStart",
@@ -695,6 +693,10 @@ function ExportToCSharp()
             }
             else if (tile.type != "SCENERY ELEMENTS"){
                 let value = gfxToCode[tile.gfx] || tile.gfx || "";
+                if (value == "cannontop")
+                {
+                    grid[gy+1][gx] = "cannonbottom"
+                }
                 grid[gy][gx] = value;
             }
         }
