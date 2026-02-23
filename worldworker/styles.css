@@ -87,7 +87,7 @@ canvas{
     transition: 0.2s;
 }
 .toolbox:hover{
-    height: 156px;
+    height: 183px;
 }
 .toolbox #title{
     -webkit-user-select: none; /* Safari */

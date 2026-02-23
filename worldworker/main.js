@@ -14,7 +14,7 @@ var mouseStats = document.getElementById('mouseStats')
 addEventListener("resize", (event) => {});  //refresh on resize
 addEventListener("wheel", (event) => {});   //move around with mouse wheel
 addEventListener("dblclick", (event) => {}); //double click
-var activeElements=["BLOCK ELEMENTS", "SCENERY ELEMENTS", "BONUS ELEMENTS", "NPC ELEMENTS", "CUSTOM TILE ELEMENTS", "CUSTOM SCENERY ELEMENTS"]
+var activeElements=["BLOCK ELEMENTS", "SCENERY ELEMENTS", "BONUS ELEMENTS", "NPC ELEMENTS","MARK ELEMENTS", "CUSTOM TILE ELEMENTS", "CUSTOM SCENERY ELEMENTS"]
 activeElements.forEach(element => {
     console.log(element)
     checkbox = document.querySelector(`[id='${element}']`);
@@ -42,30 +42,39 @@ function makeid(length) {
 
 //create tile class
 function Tile(x, y, image, type, key, set, gfx){
-    var tile = new Image()
-    tile.src = 'tiles/'+image+'.png'
+    this.tile = new Image()  // Changed from var tile to this.tile
+    this.imageLoaded = false
+    
+    this.tile.onload = () => { 
+        this.imageLoaded = true
+    }
+    this.tile.onerror = () => { 
+        console.error('Failed to load:', 'tiles/'+image+'.png')
+    }
+
+    this.tile.src = 'tiles/'+image+'.png'
     this.tileGfx = image
     this.gfx = gfx
     this.type = type
     this.x = x
     this.y = y
-    this.hovered = false;
+    this.hovered = false
     this.name = key
     this.set = set
 
     this.setNewImage = function(image){
-        tile.src = 'tiles/'+image+'.png'
+        this.tile.src = 'tiles/'+image+'.png' 
         this.tileGfx = image
+        this.imageLoaded = false
+        this.tile.onload = () => { this.imageLoaded = true }
     }
 
     this.draw = function(cmx, cmy){
-        if (activeElements.includes(this.type)){
-        c.drawImage(tile, x-cmx, y-cmy, 32, 32)
-        if (this.hovered) {
-            c.drawImage(cursor, x-cmx, y-cmy, 32, 32)
-            // c.fillStyle = "rgba(255, 255, 255, 0.5)"; // Brighter overlay
-            // c.fillRect(this.x - cmx, this.y - cmy, 32, 32);
-        }
+        if (activeElements.includes(this.type) && this.imageLoaded){
+            c.drawImage(this.tile, this.x-cmx, this.y-cmy, 32, 32) 
+            if (this.hovered) {
+                c.drawImage(cursor, this.x-cmx, this.y-cmy, 32, 32)
+            }
         }
     }
 }
@@ -274,8 +283,10 @@ function Load(){
                     if (key.endsWith("x")) x=value
                     else if (key.endsWith("y")) y=value
                     else if (key.endsWith("set"))set=value
+                    else if (key.endsWith("set2")) return
                     else {currentKey=key; tile = value
-                    if (decoder.indexOf(tile) != -1) {image = decoder.indexOf(tile);}
+                        if (!tile || tile === "") return  // Skip empty tiles
+                        if (decoder.indexOf(tile) != -1) {image = decoder.indexOf(tile);}
                     }
                     if(currentKey == key) currentLevel.addTile(x, y, image, currentSection, currentKey, set, tile)
                 }
@@ -322,6 +333,10 @@ function Load(){
                         }
                         case "NPC ELEMENTS": {
                             addTiles(line, "e")
+                            break
+                        }
+                        case "MARK ELEMENTS": {
+                            addTiles(line, "m")
                             break
                         }
                         case "CUSTOM TILE ELEMENTS": {
@@ -498,7 +513,6 @@ function createpWindow(tile){
 
     body.append(pWindow)
 }
-
 function Preferences(){
     pWindow = document.createElement('div')
     pWindowTitlebar = document.createElement('div')
@@ -658,8 +672,12 @@ function ExportToCSharp()
         // "Bonus 010": "q1", 
     
         "Common 020" : "",
+
+        "EnemyMark 003" : "CheepCheepStart",
     };
 
+    // Collect marks
+    let marks = [];
 
     tiles.forEach(tile => {
 
@@ -667,10 +685,17 @@ function ExportToCSharp()
         const gy = Math.floor(tile.y / tileSize);
         if (gx >= 0 && gy >= 0 && gx < gridWidth && gy < gridHeight)
         {
-            let value = "";
-            if (tile.type != "SCENERY ELEMENTS"){
-            value = gfxToCode[tile.gfx] || tile.gfx || "";
-            grid[gy][gx] = value;
+            if (tile.type == "MARK ELEMENTS"){
+                // Add to marks array
+                marks.push({
+                    type: tile.gfx || tile.name || "",
+                    x: parseInt(tile.x),
+                    y: parseInt(tile.y)
+                });
+            }
+            else if (tile.type != "SCENERY ELEMENTS"){
+                let value = gfxToCode[tile.gfx] || tile.gfx || "";
+                grid[gy][gx] = value;
             }
         }
 
@@ -693,7 +718,25 @@ function ExportToCSharp()
         output += "\n";
     }
 
-    output += "};";
+    output += "};\n\n";
+
+    // Add marks array
+    output += "public Mark[] _marks = new Mark[]\n{\n";
+    
+    marks.forEach((mark, index) => {
+        output += `    new Mark { Type = "${mark.type}", X = ${mark.x}, Y = ${mark.y} }`;
+        if (index < marks.length - 1) output += ",";
+        output += "\n";
+    });
+    
+    output += "};\n\n";
+    
+    // Add Mark struct definition
+    output += "public struct Mark\n{\n";
+    output += "    public string Type;\n";
+    output += "    public int X;\n";
+    output += "    public int Y;\n";
+    output += "}";
 
     const blob = new Blob([output], { type: "text/plain" });
     const link = document.createElement("a");
