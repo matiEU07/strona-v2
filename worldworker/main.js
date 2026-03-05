@@ -665,7 +665,7 @@ function ExportToCSharp()
         
         "Bonus 012": "c1", 
         "Bonus 002": "q1", 
-        "Bonus 004": "q1", 
+        "Bonus 004": "qm", 
     
         "Hazard 012": "cannontop",
 
