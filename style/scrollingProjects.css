@@ -53,6 +53,15 @@
   from {margin-left: 100%;}
   to {margin-left: calc(50% - 40px);}
 }
+@keyframes hideSidebar {
+  from {margin-left: calc(50% - 40px);}
+    to {margin-left: 100%;}
+
+}
+.sidebarHide{
+    animation: hideSidebar 0.5s cubic-bezier(0.165, 0.84, 0.44, 1) forwards !important;
+}
+
 .sidebarText{
     background-color: rgba(158, 158, 158, 0.172);
     color: rgb(193, 193, 193);
@@ -63,6 +72,12 @@
     backdrop-filter: blur(10px);
 }
 
+.galleryButton{
+    text-decoration: underline;
+    bottom: 50px;
+    position: absolute;
+    cursor: pointer;
+}
 
 #ochota{
     background-image: url(../projects/ochotaThumb.png);

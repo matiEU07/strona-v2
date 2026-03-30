@@ -1,3 +1,5 @@
+const $ = (id) => document.getElementById(id);
+
 class Project {
   constructor(name, desc, dates, images) {
     this.name = name;
@@ -29,6 +31,17 @@ projects.push(
 );
 function openProject(projectName, projectID) {
     const project = projects.find((element) => element.name === projectName);
-    document.getElementById(projectID).innerHTML += '<div class="sidebarText">'+project.desc+'</div>';
-    document.getElementById(projectID).classList.add("noPointer")
+    if(!$(projectID).dataset.loaded){
+      $(projectID).innerHTML += '<div class="sidebarText">'+project.desc+'<br><span class="galleryButton" onclick="gallery('+projectID+')">gallery</span>'+'</div>'
+      $(projectID).classList.add("noPointer")
+      $(projectID).dataset.loaded = true;
+    }
+    else
+    {
+      // $(projectID).children[0].innerHTML=""
+    }
+  }
+  function gallery(projectID)
+  {
+    console.log("gallery")
   }
