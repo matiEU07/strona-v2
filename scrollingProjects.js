@@ -18,7 +18,8 @@ projects.push(
     Featuring Modernist architecture with windows that light up the entire enviroment.<br>
     ...the neons are still work in progress.`,
     "2025–now", 
-    []
+        ["projects/test1.png", "projects/test2.webp"]
+
   )
 );
 projects.push(
@@ -26,7 +27,8 @@ projects.push(
     "Hotel Forum",
     `A detailed 3D model of the exterior of one of the last and most innovative hotels built in the beautiful late Modernist architecture.`,
     "2025–now", 
-    []
+        ["projects/forum.png", "projects/forum-ehh.webp"]
+
   )
 );
 function openProject(projectName, projectID) {
@@ -43,5 +45,14 @@ function openProject(projectName, projectID) {
   }
   function gallery(projectID)
   {
-    console.log("gallery")
+    $("body").append()
+
+    ["projects/test1.png", "projects/test2.webp"]
+
+    
+    // <div class="gallery-container">
+
+    //     <img src="projects/forum-ehh.png" alt="hotel forum, river side, rendered in cycles.">
+
+    // </div>        
   }
