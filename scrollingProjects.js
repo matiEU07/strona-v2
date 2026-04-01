@@ -18,7 +18,7 @@ projects.push(
     Featuring Modernist architecture with windows that light up the entire enviroment.<br>
     ...the neons are still work in progress.`,
     "2025–now", 
-        ["projects/test1.png", "projects/test2.webp"]
+        ["projects/ochotaThumb.png"]
 
   )
 );
@@ -27,14 +27,14 @@ projects.push(
     "Hotel Forum",
     `A detailed 3D model of the exterior of one of the last and most innovative hotels built in the beautiful late Modernist architecture.`,
     "2025–now", 
-        ["projects/forum.png", "projects/forum-ehh.webp"]
+        ["projects/forum.png", "projects/forum-ehh.png"]
 
   )
 );
 function openProject(projectName, projectID) {
     const project = projects.find((element) => element.name === projectName);
     if(!$(projectID).dataset.loaded){
-      $(projectID).innerHTML += '<div class="sidebarText">'+project.desc+'<br><span class="galleryButton" onclick="gallery('+projectName+')">gallery</span>'+'</div>'
+      $(projectID).innerHTML += '<div class="sidebarText">'+project.desc+'<br><span class="galleryButton" onclick="gallery(\''+projectName+'\')">gallery</span>'+'</div>'
       $(projectID).classList.add("noPointer")
       $(projectID).dataset.loaded = true;
     }
@@ -43,16 +43,62 @@ function openProject(projectName, projectID) {
       // $(projectID).children[0].innerHTML=""
     }
   }
-  function gallery(projectID)
+  function gallery(projectName)
   {
-    $("body").append()
+    const project = projects.find((element) => element.name === projectName);
+    if (!project) return;
 
-    ["projects/test1.png", "projects/test2.webp"]
+    let container = document.querySelector(".gallery-container");
 
-    
-    // <div class="gallery-container">
+    if (!container) { //create new container
+        container = document.createElement("div");
+        container.classList.add("gallery-container");
 
-    //     <img src="projects/forum-ehh.png" alt="hotel forum, river side, rendered in cycles.">
+        const img = document.createElement("img");
+        container.appendChild(img);
+        document.body.appendChild(container);
 
-    // </div>        
+        container.dataset.index = "0";
+
+        function render() {
+            const index = parseInt(container.dataset.index, 10);
+            img.src = project.images[index];
+            img.alt = project.name;
+        }
+
+        function onKeyDown(e) {
+            if (e.key !== "ArrowRight" && e.key !== "ArrowLeft" && e.key !== "Escape") return;
+
+            let index = parseInt(container.dataset.index, 10);
+
+            if (e.key === "ArrowRight") {
+                index = (index + 1) % project.images.length;
+            } else if (e.key === "ArrowLeft") {
+                index = (index - 1 + project.images.length) % project.images.length;
+            } else if (e.key === "Escape"){
+                container.remove()
+                document.removeEventListener("keydown", onKeyDown);
+                window.__galleryKeyHandlerAttached = false;
+            }
+
+            container.dataset.index = index.toString();
+            render();
+        }
+
+        if (!window.__galleryKeyHandlerAttached) {
+            document.addEventListener("keydown", onKeyDown);
+            window.__galleryKeyHandlerAttached = true;
+        }
+
+        render();
+    } else {
+        // use exissting container
+        let index = parseInt(container.dataset.index || "0", 10);
+        index = (index + 1) % project.images.length;
+        container.dataset.index = index.toString();
+
+        const img = container.querySelector("img");
+        img.src = project.images[index];
+        img.alt = project.name;
+    }
   }
