@@ -34,7 +34,7 @@ projects.push(
 function openProject(projectName, projectID) {
     const project = projects.find((element) => element.name === projectName);
     if(!$(projectID).dataset.loaded){
-      $(projectID).innerHTML += '<div class="sidebarText">'+project.desc+'<br><span class="galleryButton" onclick="gallery('+projectID+')">gallery</span>'+'</div>'
+      $(projectID).innerHTML += '<div class="sidebarText">'+project.desc+'<br><span class="galleryButton" onclick="gallery('+projectName+')">gallery</span>'+'</div>'
       $(projectID).classList.add("noPointer")
       $(projectID).dataset.loaded = true;
     }
