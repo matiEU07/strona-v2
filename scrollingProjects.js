@@ -27,7 +27,17 @@ projects.push(
     "Hotel Forum",
     `A detailed 3D model of the exterior of one of the last and most innovative hotels built in the beautiful late Modernist architecture.`,
     "2025–now", 
-        ["projects/forum.png", "projects/forum-ehh.png"]
+        // ["projects/forum.png", "projects/forum-ehh.png"]
+        ["projects/forum.png", "projects/forum2d.png", "projects/forumSide.png", "projects/forum-interior.png"]
+
+  )
+);
+projects.push(
+  new Project(
+    "Kowloon Walled City",
+    `A fairly detailed 3D model of my own interpretation of the kowloon walled city, focusing on Geometry Nodes for speeding up the modelling process.`,
+    "2024–now", 
+        ["projects/kowloon.png", "projects/kowloon2.png", "projects/kowloon3.png", "projects/kowloon4.png"]
 
   )
 );

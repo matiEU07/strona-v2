@@ -6,7 +6,7 @@
     padding: 0px;
     user-select: none;
     -webkit-user-select: none;
-
+    margin-bottom: 45px !important;
 }
 .scrollingProject{
     position: relative;
@@ -84,5 +84,9 @@
 }
 #forum{
     background-image: url(../projects/forum.png);
+    /* filter: brightness(50%); */
+}
+#kowloon{
+    background-image: url(../projects/kowloon.png);
     /* filter: brightness(50%); */
 }

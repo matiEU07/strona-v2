@@ -23,7 +23,10 @@
   to {background-color: rgba(0, 0, 0, 0.6);}
 }
 .gallery-container img{
-    height: 80%;
+    max-height: 80%;
+    height: auto;
+    max-width: 100%;
+    object-fit: contain;
     border-radius: 6px;
     animation: showPhoto 0.6s cubic-bezier(0.075, 0.82, 0.165, 1) forwards;
 }
