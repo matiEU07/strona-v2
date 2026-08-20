@@ -78,7 +78,38 @@
     position: absolute;
     cursor: pointer;
 }
+.galleryArrow{
+    position: absolute;
+    z-index: 1000000;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 60px;
+    color: rgba(255, 255, 255, 0.5);
+    cursor: pointer;
+    user-select: none;
+    -webkit-user-select: none;
+    background-color: rgba(45, 45, 45, 0.5);
+    padding-bottom: 25px;
+    padding-top: 16px;
+    padding-left: 23px;
+    padding-right: 23px;
+    line-height: 20px;
+    border-radius: 100%;
+    backdrop-filter: blur(6px);
+    transition: 0.1s;   
+    transition-timing-function: ease-in-out;
+}
+.galleryArrow:active{
+    transform: translateY(-50%) scale(0.8);
+        background-color: rgba(13, 13, 13, 0.557);
 
+}
+.galleryArrowLeft{
+    left: 20px;
+}
+.galleryArrowRight{
+    right: 20px;
+}
 #ochota{
     background-image: url(../projects/ochotaThumb.png);
 }
