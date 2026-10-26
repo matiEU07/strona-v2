@@ -25,7 +25,7 @@ body {
   font-family: Quicksand, sans-serif;
   margin: 0px;
   font-size: 20px;
-  background: url("../bg.png");
+  background: url("../bg-blur.png");
   min-height: 100%;
   padding-top: 25px;
   background-color: rgb(0, 0, 0);
@@ -35,7 +35,7 @@ body {
 }
 
 /* Backdrop blur overlay */
-body::before {
+/* body::before {
   content: '';
   position: fixed;
   width: 100%;
@@ -44,7 +44,7 @@ body::before {
   left: 0;
   backdrop-filter: blur(25px) saturate(200%);
   z-index: -1;
-}
+} */
 
 nav {
   background-color: rgba(0, 0, 0, 0);
