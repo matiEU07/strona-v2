@@ -12,9 +12,10 @@
     position: relative;
     background-color: rgba(0, 0, 0, 0.391);
     border-radius: 8px;
-    width: 50%;
-    margin-left: 25%;
-    height: 360px;
+    width: 70%;
+    margin-left: 15%;
+    /* height: 360px; */
+    height: 50%;
     padding: 0px;
     margin-top: 20px;
     margin-bottom: 20px;
@@ -32,6 +33,13 @@
     transition: 0.5s;
 
     cursor: pointer;
+}
+@media (min-width: 1000px) {
+    .scrollingProject{
+    margin-left: 25%;
+    width: 50%;
+    height: 360px;
+    }
 }
 .scrollingProject h2{
         margin: 0px;
