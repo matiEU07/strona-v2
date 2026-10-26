@@ -21,6 +21,7 @@ html {
 }
 
 body {
+  color: rgba(250, 252, 255, 0.694); /* fallback for Opera Mini */
   color: var(--maintext);
   font-family: Quicksand, sans-serif;
   margin: 0px;
@@ -79,16 +80,19 @@ p {
 
 a {
   text-decoration: none;
+  color: rgba(250, 252, 255, 0.694); /* fallback for Opera Mini */
   color: var(--maintext);
 }
 
 a:visited {
+  color: rgba(250, 252, 255, 0.694); /* fallback for Opera Mini */
   color: var(--maintext);
 }
 
 button {
   font-family: "Quicksand", sans-serif;
   background-color: transparent;
+  color: rgba(250, 252, 255, 0.694); /* fallback for Opera Mini */
   color: var(--maintext);
   border-style: solid;
   padding: 5px var(--defaultPadding);
